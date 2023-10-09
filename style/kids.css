@@ -1,0 +1,267 @@
+@media screen and (max-width: 760px) {
+  .polo-bear {
+    background-image: url(/ASSETS/IMAGES/general/0209_country_selector_bg.jpg);
+    background: #fff !important;
+  }
+  .polo-bear .polo-bear-con {
+    display: block !important;
+  }
+  .polo-bear .polo-bear-con .p-bear-left, .polo-bear .polo-bear-con .polo-bear-right {
+    gap: 0;
+    width: 100% !important;
+  }
+  .polo-bear .polo-bear-con .p-bear-left {
+    margin-bottom: 8rem;
+  }
+  .polo-bear .polo-bear-con .p-bear-left section {
+    text-align: center;
+    color: #041E3A;
+  }
+  .polo-bear .polo-bear-con .p-bear-left a {
+    color: #041E3A !important;
+  }
+  .polo-bear .polo-bear-con .p-bear-left h2 {
+    font-size: 45px;
+  }
+  .bear-shop .b-shop-title {
+    font-size: 6rem !important;
+  }
+  .shop-by-cat .s-by-cat-con {
+    width: 90vw !important;
+  }
+  .shop-by-cat .s-by-cat-con .s-by-cat-title {
+    font-size: 35px !important;
+  }
+  .shop-by-cat .single-category {
+    min-width: 70vw !important;
+    margin: 1.5rem !important;
+  }
+  .shop-by-cat .single-category p {
+    font-size: 1.5rem !important;
+  }
+  .shop-by-cat .single-category a {
+    text-decoration: none !important;
+  }
+  .living {
+    background-image: url(/ASSETS/IMAGES/general/0209_country_selector_bg.jpg);
+  }
+  .living .living-con .living-items {
+    width: 90% !important;
+  }
+  .living .living-con .living-items .living-text h2 {
+    font-size: 45px;
+  }
+  .living .living-con .living-items .living-text p {
+    font-size: 27px;
+  }
+  .double-rl {
+    background: none !important;
+  }
+  .double-rl .rcl-mobile-img {
+    display: block !important;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    position: relative;
+  }
+  .double-rl .double-rl-con {
+    left: 5%;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin: auto;
+    bottom: 0;
+    width: 90% !important;
+  }
+  .double-rl .double-rl-con img {
+    width: 100%;
+  }
+  .homepage-explore .home-explore-con {
+    display: block !important;
+  }
+  .homepage-explore .home-explore-con .single-explore {
+    width: 100% !important;
+  }
+  .homepage-explore .home-explore-con .single-explore p {
+    font-size: calc(27px + 1rem) !important;
+  }
+  .homepage-explore .home-explore-con .single-explore a {
+    font-size: 27px;
+  }
+  .men-explore .single-explore {
+    min-width: 70% !important;
+  }
+  .purple-label {
+    padding: 1rem 2rem 0 !important;
+  }
+  .purple-label .purple-label-con {
+    flex-direction: column;
+  }
+  .purple-label .purple-label-con .purple-label-left {
+    order: 1 !important;
+    padding: 3rem 0 !important;
+  }
+  .purple-label .purple-label-con .purple-label-left, .purple-label .purple-label-con .purple-label-right {
+    width: 100% !important;
+  }
+}
+@media screen and (max-width: 956px) {
+  .alert-con {
+    justify-content: center !important;
+  }
+  .alert-locators {
+    display: none;
+  }
+  .alert-locators {
+    border: red solid 3px;
+    display: none !important;
+  }
+  .header-links {
+    display: none !important;
+  }
+  .header-icons {
+    gap: 0;
+  }
+  .unshow-icon {
+    display: none;
+  }
+  .menu-icon {
+    display: inline !important;
+  }
+  .pink-pony .p-pony-title .p-heading {
+    font-size: 300%;
+  }
+  .pink-pony .p-slider-title, .pink-pony .p-slider-description {
+    font-size: 400%;
+  }
+  .bear-shop div {
+    text-align: center;
+  }
+  .bear-shop .b-shop-title {
+    font-size: 7em !important;
+  }
+  .bear-shop .b-shop-description {
+    font-size: 27px !important;
+    width: 70%;
+    margin: auto !important;
+  }
+  .bear-shop .box-logo {
+    display: none;
+  }
+  .skating {
+    justify-content: center !important;
+  }
+  .skating .skating-con {
+    width: 80vw !important;
+  }
+  .discover-section {
+    width: 100vw;
+    border: 2px solid;
+  }
+  .discover-section .discover-left {
+    display: none;
+  }
+  .discover-section .discover-right {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: solid 2px;
+  }
+  .men-explore {
+    background: red;
+  }
+  .men-explore .explore-left {
+    display: none;
+  }
+  .footer-con {
+    display: block !important;
+  }
+  .footer-con .footer-newsletter h4 {
+    font-size: 12px;
+  }
+  .footer-con .footer-newsletter p {
+    font-size: 10px;
+  }
+  .footer-con section {
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    border-top: 1px #999 solid;
+    border-right: none !important;
+    padding-top: 2rem;
+    margin-top: 2rem;
+  }
+  .footer-con section .plus {
+    display: block !important;
+  }
+  .footer-con section li {
+    line-height: 2.5;
+  }
+  .footer-con section li a {
+    color: black;
+  }
+}
+.kids-tab {
+  margin: 3rem 0;
+}
+.kids-tab .tab-header {
+  padding: 2rem 0;
+  background: #041E3A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.kids-tab .tab-header #shop-kids, .kids-tab .tab-header #shop-baby {
+  display: none;
+}
+.kids-tab .tab-header label {
+  color: white;
+  border-bottom: 3px solid #fff;
+  padding-bottom: 1.9rem;
+}
+.kids-tab .tab-header #shop-kids:checked ~ .tab-sample1 #shop-baby:checked ~ .tab-sample2 {
+  display: block;
+}
+.kids-tab .tab-header .tab-sample1, .kids-tab .tab-header .tab-sample2 {
+  display: none;
+  position: absolute;
+  background: green;
+  width: 100vw;
+  margin-top: 2rem;
+  left: 0;
+}
+.kids-tab .tab-header .tab-title:focus {
+  color: red;
+  text-decoration: underline;
+  padding: 2rem;
+}
+.kids-tab .tab-header .tab-title:focus .tab-sample1 {
+  display: block;
+}
+.kids-tab .tab-header .tab-shop {
+  margin-top: 2rem;
+  left: 0;
+  width: 100vw;
+  background: blue;
+  display: none;
+}
+.kids-tab .tab-header .tab-shop .tab-shop-con {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  width: 100%;
+}
+.kids-tab .tab-header .tab-shop .tab-shop-con .single-shop-item {
+  border: red solid 2px;
+  width: 20%;
+  position: relative;
+  height: 300px;
+}
+.kids-tab .tab-header .tab-shop .tab-shop-con .single-shop-item .shop-item-title {
+  border: solid 2px;
+  padding: 1rem;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}/*# sourceMappingURL=kids.css.map */

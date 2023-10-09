@@ -1,0 +1,287 @@
+@import url(_global.scss);
+.men-hero {
+  max-height: 70vh !important;
+  margin-bottom: 5rem;
+}
+.men-hero .men-hero-con {
+  max-height: 70% !important;
+  max-width: 100%;
+}
+.men-hero .men-hero-con .hero-img {
+  max-width: 100%;
+  max-height: 100%;
+  touch-action: pan-y;
+}
+.men-hero .men-hero-con .hero-img > img {
+  min-width: 100% !important;
+  min-height: 100% !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.men-hero .men-hero-con .hero-img .hero-links {
+  display: flex;
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
+  text-align: center;
+  justify-content: center;
+}
+.men-hero .men-hero-con .hero-img .hero-links a {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  text-decoration: none;
+  transition: all 0.5s ease;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 5px;
+  text-decoration: none;
+  color: #fff;
+}
+.men-hero .men-hero-con .hero-img a:hover {
+  padding-bottom: 2px;
+  padding-bottom: 0;
+}
+.men-hero .men-hero-con .hero-img .caption-con-1 {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  left: 10%;
+  top: 10%;
+}
+.men-hero .men-hero-con .hero-img .caption-con-1 img {
+  width: 10rem;
+}
+.men-hero .men-hero-con .hero-img .caption-con-1 h2 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 3rem;
+  margin: 0.5rem 0;
+}
+.men-hero .men-hero-con .hero-img .caption-con-1 .hero-links {
+  display: flex;
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
+  text-align: center;
+  justify-content: center;
+}
+.men-hero .men-hero-con .hero-img .caption-con-1 .hero-links a {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  text-decoration: none;
+  transition: all 0.5s ease;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 5px;
+  text-decoration: none;
+  color: #fff;
+}
+.men-hero .men-hero-con .hero-img .caption-con-1 a:hover {
+  padding-bottom: 2px;
+  padding-bottom: 0;
+}
+.men-hero .men-hero-con .hero-img .caption-con-2 {
+  text-align: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  bottom: 4rem;
+  margin: auto;
+}
+.men-hero .men-hero-con .hero-img .caption-con-2 .hero-links {
+  margin: 1rem auto 0;
+}
+.men-hero .men-hero-con .hero-img .caption-con-3 {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  bottom: 3rem;
+}
+.men-hero .men-hero-con .hero-img .caption-con-3 p {
+  margin: 1rem 0;
+}
+
+.tailoring-utility {
+  background: red;
+  display: none;
+  color: #BAAD72;
+  font-family: "Times New Roman", Times, serif;
+}
+.tailoring-utility a {
+  color: #BAAD72;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 5px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.8s ease;
+}
+.tailoring-utility a:hover {
+  padding-bottom: 0;
+}
+.tailoring-utility .t-utility-header {
+  text-align: center;
+  padding: 1rem 0;
+  border-bottom: 4px #fff solid;
+  position: sticky;
+  width: 100%;
+  top: 3.7rem;
+  background: #041E3A;
+}
+.tailoring-utility .t-utility-header a {
+  color: #fff;
+  text-decoration: none;
+}
+.tailoring-utility .t-utility-header a:active {
+  border-bottom: #BAAD72;
+}
+.tailoring-utility .t-utility-des {
+  padding: 2rem 0;
+  width: 40%;
+  margin: auto;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+}
+.tailoring-utility .t-utility-des h2 {
+  font-size: 45px;
+}
+.tailoring-utility .t-utility-des p {
+  font-size: 15px;
+}
+.tailoring-utility .t-utility-des a {
+  font-size: 12px;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 5px;
+  text-decoration: none;
+  color: #fff;
+  transition: all ease 0.8s;
+  border-color: #BAAD72;
+}
+.tailoring-utility .t-utility-des a:hover {
+  padding-bottom: 0;
+}
+.tailoring-utility .t-utility-des p, .tailoring-utility .t-utility-des h2, .tailoring-utility .t-utility-des a {
+  color: #BAAD72;
+}
+.tailoring-utility .t-utility-main {
+  border: #BAAD72 2px solid;
+  width: 85%;
+  padding: 3rem 0;
+  margin: auto;
+}
+.tailoring-utility .t-utility-main .look-1 .look-1-con {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+.tailoring-utility .t-utility-main .look-1 .look-1-con .single-look {
+  width: 50%;
+}
+.tailoring-utility .t-utility-main .look-1 .look-1-con .single-look img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.men-skating {
+  height: 100vh;
+}
+.men-skating .skating-con {
+  width: 100%;
+}
+
+.purple-label {
+  background: url(/ASSETS/IMAGES/Men_files/purple-label-bg.jpg);
+  padding: 4rem 4rem 0;
+  margin: 3rem 0;
+}
+.purple-label .purple-label-con {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F9F9F9;
+  min-width: 100%;
+  height: 100%;
+}
+.purple-label .purple-label-con .purple-label-left {
+  padding: 1rem;
+  text-align: center;
+  min-width: 50%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.purple-label .purple-label-con .purple-label-left h2 {
+  font-family: Courier, monospace;
+  font-weight: 600;
+}
+.purple-label .purple-label-con .purple-label-left h1 {
+  font-family: monospace;
+  letter-spacing: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.purple-label .purple-label-con .purple-label-left h3 {
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  letter-spacing: 0.5rem;
+  margin-top: 2rem;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word;
+  flex-wrap: wrap;
+}
+.purple-label .purple-label-con .purple-label-left p {
+  font-size: 15px;
+}
+.purple-label .purple-label-con .purple-label-left a {
+  color: #041E3A;
+  text-decoration: none;
+  margin: 10px;
+  font-size: 12px;
+  padding-bottom: 8px;
+  transition: all 0.8s ease;
+  border-bottom: 1px solid #041E3A;
+}
+.purple-label .purple-label-con .purple-label-left a:hover {
+  padding-bottom: 2px;
+}
+.purple-label .purple-label-con .purple-label-right {
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100%;
+}
+.purple-label .purple-label-con .purple-label-right img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.purple-label .purple-label-con .purple-label-left, .purple-label .purple-label-con .purple-label-right {
+  width: 50%;
+}
+
+.men-explore {
+  background: #F5E5D8;
+  padding: 5rem 0;
+}
+.men-explore .explore-left h4 {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 600;
+}
+.men-explore .explore-left h2 {
+  font-family: "Times New Roman", Times, serif;
+}
+.men-explore .explore-right {
+  padding: 0;
+}
+.men-explore .explore-right .single-explore {
+  position: relative;
+}
+.men-explore .explore-right .single-explore .explore-text {
+  color: white;
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+  text-align: center;
+}
+.men-explore .explore-right .single-explore .explore-text p {
+  font-size: 27px;
+  font-family: "Times New Roman", Times, serif;
+}/*# sourceMappingURL=men.css.map */

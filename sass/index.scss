@@ -1,0 +1,712 @@
+// import variables file
+@import 'variables.scss';
+
+// import global styling file
+@import url(_global.scss);
+
+
+// .homepage-wrapper>*{
+//     position: sticky;
+//     top: 0;
+// }
+
+
+/* 
+=======================
+=======================
+HERO SECTION
+=======================
+=======================
+ */
+
+
+.hero{
+
+    
+
+    #hero-con{
+        
+        #carousel-caption{
+            margin-bottom: 3rem;
+            text-align: center;
+
+            img{
+                width: 13rem;
+                margin-bottom: 1rem;
+            }
+
+            p{
+                font-size: $regular-text;
+                width: 50%;
+                margin: 0 auto 1rem;
+
+            }
+
+            h1{
+                font-family: 'Times New Roman', Times, serif;
+                font-size: $xlg-text;
+            }
+
+            .hero-links{
+                @include flex-center-center;
+                gap: 2rem;
+                text-decoration: none;
+
+                a{
+                    color: white;
+                    text-decoration: none;
+                    font-size: $xsmall-text;
+                    @include link-animate;
+                    transition: all 1s ease;
+                    
+                }
+
+                a:hover{
+                    @include link-animated;
+                }
+
+            }
+        }
+
+    }
+
+    
+
+
+   
+
+
+
+
+}
+
+
+
+
+ /* 
+=======================
+=======================
+END OF HERO SECTION
+=======================
+=======================
+ */
+
+
+
+
+
+
+
+
+
+
+  /* 
+=======================
+=======================
+POLO BEAR SECTION
+=======================
+=======================
+ */
+
+
+.polo-bear{
+    background: url(/ASSETS/IMAGES/general/0919_hp_c02_bg.jpg);
+    @include background-norepeat-cover-center;
+    width: 100%;
+    padding: 5rem 0;
+
+    // TODO: remove "margin: bottom;"
+    margin-bottom: 3rem;
+
+    // polo bear container
+    .polo-bear-con{
+        @include flex-space-center;
+        gap: 2rem;
+        width: 86vw;
+        margin: auto;
+
+        // polo bear left
+        .p-bear-left{
+            width: 40%;
+            position: relative;
+            color: $white;
+
+            div{
+                height: 88%;
+                width: 100%;
+                // background: url(/ASSETS/IMAGES/general/0919_hp_c02_img.jpg);
+                @include  background-norepeat-contain-center;
+                // margin-bottom: 1.5rem;
+
+                img{
+                    width: 100%;
+                }
+            }
+
+            section{
+                // margin-top: 3rem;
+                // position: absolute;
+                bottom: 0;
+
+                h2{
+                    font-family: $times;
+                    line-height: 1.5;
+                }
+    
+                a{
+                    color: $white;
+                    font-size: $small-text;
+                    font-family: $monospace;
+                    text-decoration: none;
+                    border-bottom: 1px $white solid;
+                    padding-bottom: 0.5rem;
+                    transition: all 0.8s ease;
+                }
+
+                a:hover{
+                    padding-bottom: 0.2rem;
+                }
+
+                
+            }
+
+            
+        }
+        // end of polo bear left
+
+
+        // polo bear right
+        .polo-bear-right{
+            width: 40%;
+
+            h1{
+                text-align: center;
+                font-size: $medium-text;
+                font-family: $times;
+                font-weight: 400;
+                margin-bottom: 1rem;
+                color: $primary-blue;
+            }
+
+            .p-bear-slider{
+
+                
+
+                img{
+                    width: 100%;
+                }
+            }
+        }
+        // end of polo bear right
+
+    }
+    // end of polo container
+}
+
+
+
+  /* 
+=======================
+=======================
+END OF POLO BEAR SECTION
+=======================
+=======================
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+   /* 
+=======================
+=======================
+ PINK PONNY SECTION
+=======================
+=======================
+ */
+
+ #pink-pony-slider{
+    background-color: red;
+    position: relative;
+    // display: flex;
+    // justify-content: center;
+ }
+
+
+ #pink-pony-item{
+    // padding: 3rem;
+    // width: fit-content;
+    position: absolute;
+    border: blue 1rem solid;
+    margin: 0 auto;
+ }
+
+
+
+   /* 
+=======================
+=======================
+END OF  PINK PONNY SECTION
+=======================
+=======================
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* 
+=======================
+=======================
+BEAR SHOP SECTION
+=======================
+=======================
+ */
+
+
+ .bear-shop{
+    background: url(/ASSETS/IMAGES/general/bear-shop-bg.jpg);
+    @include background-norepeat-cover-center;   
+    margin: 4rem 0;
+    padding:  15rem 0;
+    width: 100%;
+    
+    .b-shop-con{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // height: 90vw;
+        // margin: 9rem auto;
+        text-align: center;
+        color: $white;
+
+        div{
+            position: relative;
+        }
+
+        .box-logo{
+            position: absolute;
+            left: 15%;
+            width: 8rem;
+        }
+
+        h1{
+            font-size: calc($xlg-text * 3);
+        }
+
+        p{
+            font-size: $regular-text;
+            margin: 1rem 0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        a{
+           
+            margin: 0 1rem;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid white;
+            padding-bottom: 5px;
+            transition:  all 0.5s ease;
+            
+        }
+
+        a:hover{
+            @include link-animated;
+        }
+       
+    }
+ }
+
+
+    /* 
+=======================
+=======================
+END OF  BEAR SHOP SECTION
+=======================
+=======================
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* 
+=======================
+=======================
+SKATING SECTION
+=======================
+=======================
+ */
+
+
+
+  .skating{
+    background: url(/ASSETS/IMAGES/general/skating-bg-img.jpg);
+    margin-bottom: 3rem;
+    @include background-norepeat-cover-center;
+    padding: 5rem 0;
+    @include flex-end-center ;
+    
+    .skating-con{
+        width: 50%;
+        // margin: 0 0 0 auto;
+        @include flex-center-center;
+        flex-direction: column;
+        // height: 100vh;
+
+        .skating-items{
+            // width: 40%;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        img{
+            width: 40%;
+            margin: auto;
+            
+        }
+
+        .skating-des{
+            font-size: calc($regular-text + 4px);
+            line-height: 1.5;
+            margin: 0 auto 1rem ;
+            color: $white;
+            width: 60%
+
+        }
+        a{
+            @include link-animate;
+            transition:  all 0.5s ease;
+            font-size: $small-text;
+        }
+
+        a:hover{
+            @include link-animated;
+        }
+
+
+
+    }
+
+  }
+
+
+
+
+
+
+ 
+    /* 
+=======================
+=======================
+END OF SKATING SECTION
+=======================
+=======================
+ */
+
+
+
+    /* 
+=======================
+=======================
+LIVING SECTION
+=======================
+=======================
+*/
+
+
+.living{
+    
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    position: relative;
+
+    .living-con{
+
+        position: relative;
+        width: 90%;
+        height: 100%;
+
+        video{
+            z-index: -1;
+            position: absolute;
+            
+        }
+        
+        .living-items{
+            width: 100%;
+        margin: auto;
+        text-align: center;
+        top: 50%;
+        z-index: 9;
+        position: relative;
+        }
+
+        img{
+            width: 50%;
+            margin: 1rem auto 0;
+        }
+
+        .living-text{
+            font-family: $times;
+            z-index: 999;
+            color: $white;
+
+            h2{
+                font-size: calc( $lg-text + 1rem);
+
+                
+            }
+
+            p{
+                font-size: 1rem;
+                line-height: 1;
+                margin: 1rem 0;
+            }
+
+            .living-links{
+
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                
+                a{
+                    text-decoration: none ;
+
+                    font-size: $small-text;
+                    @include link-animate;
+                    margin-bottom: 2rem;
+                    color: $white;
+                    transition:  all 0.8s ease;
+
+                }
+
+                a:hover{
+                    @include link-animated;
+                }
+
+
+            }
+        }
+    }
+
+    
+}
+
+
+
+  /* 
+=======================
+=======================
+END OF LIVING SECTION
+=======================
+=======================
+*/
+
+
+
+
+
+
+ /* 
+=======================
+=======================
+DOUBLE RL SECTION
+=======================
+=======================
+*/
+
+
+.double-rl{
+    background: url(/ASSETS/IMAGES/general/rlc-bg.jpg);
+    height: 100vh;
+    position: relative;
+    @include background-norepeat-cover-center;
+
+    .double-rl-con{
+        position: absolute;
+        right: 3rem;
+        top: 3rem;
+        width: 50%;
+        text-align: center;
+
+        img{
+            width: 100%;
+        }
+
+        .rlc-links{
+            @include flex-center-center;
+            gap: 1rem;
+            margin-top: 1rem;
+            
+
+
+            
+            a{
+                color: $white;
+                font-size: $small-text;
+                text-decoration: none;
+                @include link-animate;
+                transition: all 0.5s ease;
+            }
+
+            a:hover{
+                @include link-animated;
+
+            }
+            
+        }
+    }
+}
+
+
+
+
+ /* 
+=======================
+=======================
+END OF DOUBLE RL SECTION
+=======================
+=======================
+*/
+
+
+
+
+
+
+
+
+
+
+
+/* 
+=======================
+=======================
+MORE TO EXPLORE SECTION
+=======================
+=======================
+*/
+
+
+.homepage-explore{
+
+
+    padding: 4rem 0;
+
+    .explore-title{
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1rem;
+        font-family: 'Times New Roman', Times, serif;
+
+        h2{
+            font-weight: 500;
+
+        }
+    }
+
+    .home-explore-con{
+        width: 70vw;
+        @include flex-center-center;
+        margin: auto;
+        
+
+        .single-explore{
+            width: 30%;
+            height: 100%;
+            padding: 1rem;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .explore-text{
+                text-align: center;
+                margin-top: 1rem;
+                
+
+                p{
+                    font-size: $medium-text;
+                }
+
+                a{
+                    text-decoration: none;
+                    @include link-animate;
+                    border-bottom: 1px solid $primary-blue;
+                    padding-bottom: 8px;
+                    transition: all 0.5s ease;
+                    font-family: $helvetica;
+                }
+
+                a:hover{
+                    padding: 2px;
+                }
+
+                p, a{
+                    color: $primary-blue;
+                    font-family: Courier, monospace;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+/* 
+=======================
+=======================
+MORE TO EXPLORE SECTION
+=======================
+=======================
+*/

@@ -1,0 +1,760 @@
+// import variables
+@import 'variables.scss';
+
+// import responsiveness 
+@import 'responsiveness.scss';
+
+// RESET
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  
+    list-style: none; 
+    text-decoration: none;
+}
+
+p{
+    font-size: $small-text;
+}
+
+h2{
+    font-size: $medium-text;
+}
+
+
+
+body{
+    min-height: 100vh;
+
+    ::-webkit-scrollbar{
+        visibility: hidden;
+    }
+
+}
+
+footer{
+    margin-top: 2rem;
+}
+
+
+
+
+
+
+
+
+
+// =======================
+// ALEERT SECTION
+// =======================
+
+
+// ALERT (all pages)
+.alertt{
+    background: $primary-blue;
+    color: $white;
+    display: flex;
+    justify-content: end;
+    padding: 0.8rem 2rem;
+
+    // alert container
+    .alert-con{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: 20%;
+        
+ 
+        // alert message
+
+        .alert-message{
+            
+            margin-right: 1rem;
+
+             
+        
+        }
+
+        p{
+            font-size: $small-text;
+            font-family: $monospace;
+            margin: 0 !important;
+
+            a{
+                color: $white;
+            }
+        }
+
+        
+        // end of alert message
+
+        // alert locators
+        .alert-locators{
+            display: flex;
+            align-items: center !important;
+            gap: 1.5rem;
+
+            a{
+                display: flex;
+                color: #fff !important;
+                align-items: center;
+            }
+
+            
+
+            .alert-locator{
+                position: relative;
+
+
+                span{
+                    color: $white !important;
+
+
+                }
+                
+
+                // header tooltip
+                .header-tooltip{
+                    display: none;
+                    position: absolute;
+                    left: 2rem;
+                    width: 100%;
+                    top: 1.6rem;
+                    background: #292726;
+                    border: 1px solid $white;
+                    padding: 0.5rem;
+                    font-size: $small-text;
+                    right: 0;
+                    transition: all 0.5s ease 2s;
+                    
+
+                 }
+                // end of header tooltip
+
+                
+
+            }
+            // end of alert locator
+
+
+            // tooltip show
+            .alert-locator:hover .header-tooltip{
+                    display: block;
+                    z-index: 99999;
+            }
+
+            // alert lang and locator
+            .alert-lang, .alert-locator div{
+                display: flex;
+                gap: 0.5rem;
+                cursor: pointer;
+                align-items: center !important;
+                color: $white;
+            }
+
+
+            
+        }
+        // end of alert locators
+    }
+
+    
+}
+// END OF ALERT
+
+
+
+
+
+
+// =======================
+// HEADER SECTION
+// =======================
+
+header{
+    background-color: $white;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    padding: 1rem 0;
+
+    // nav
+    nav{
+        max-width: 95vw;
+        margin: 0 auto;
+        @include flex-space-center;
+        flex-wrap: wrap;
+
+        // header left
+        .header-left{
+            @include flex-align-center;
+            gap: 3rem;
+
+            // menu links
+            .header-links{
+                @include flex-align-center;
+                margin: 0 ;
+                gap: 1rem;
+
+                a{
+                    text-decoration: none;
+                    color: $primary-blue;
+                    font-size: $small-text;
+                    font-family: $monospace;
+                }
+
+            }
+            // end of menu links
+            
+
+            // header logo
+            .header-logo{
+                width: 12em;
+
+                img{
+                    width: 100%;
+                }
+            }
+        }
+        // end of header left
+
+
+
+        // header right
+        .header-right{
+            display: flex;
+            // gap: 2rem;
+            align-items: center;
+
+            .header-icons{
+                @include flex-center-center;
+                gap: 2rem;
+
+            }
+
+            *{
+                font-size: calc($small-text + 0.4rem);
+                font-weight: thin;
+                color: $primary-blue;
+                cursor: pointer;
+            }
+
+            .wishlist-icon, .search-icon{
+                @include flex-center-center;
+            }
+
+            .menu-icon{
+                display: none;
+                
+            }
+        }
+        // end of header right
+    }
+    // end of nav
+}
+
+
+// =======================
+// END OF HEADER SECTION
+// =======================
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+=======================
+=======================
+HERO SECTION
+=======================
+=======================
+ */
+
+
+ .hero{
+
+    
+
+    #hero-con{
+        
+        #carousel-caption{
+            margin-bottom: 3rem;
+            text-align: center;
+
+            img{
+                width: 13rem;
+                margin-bottom: 1rem;
+            }
+
+            p{
+                font-size: $regular-text;
+                width: 50%;
+                margin: 0 auto 1rem;
+
+            }
+
+            h1{
+                font-family: 'Times New Roman', Times, serif;
+                font-size: $xlg-text;
+            }
+
+            .hero-links{
+                @include flex-center-center;
+                gap: 2rem;
+                text-decoration: none;
+
+                a{
+                    color: white;
+                    text-decoration: none;
+                    font-size: $xsmall-text;
+                    @include link-animate;
+                    transition: all 1s ease;
+                    
+                }
+
+                a:hover{
+                    @include link-animated;
+                }
+
+            }
+        }
+
+    }
+
+    
+
+
+   
+
+
+
+
+}
+
+
+
+
+ /* 
+=======================
+=======================
+END OF HERO SECTION
+=======================
+=======================
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =======================
+// SHOP BY CATEGORY SECTION
+// =======================
+
+
+
+ .shop-by-cat{
+    
+    margin: 3rem 0;
+
+    // shop by category container
+    .s-by-cat-con{
+        width: 95vw;
+        margin: 0 auto;
+
+        // shop by category title
+        .s-by-cat-title{
+            font-size: $medium-text;
+            font-family: $times;
+            color: $primary-blue;
+            margin-bottom: 2rem;
+        }
+        // end of s-b-cat title
+
+        // category slide
+        .category-slide{
+            background: $white;
+
+            // category slide
+            .category-slider{
+                display: flex;
+                overflow-x: auto;
+                overflow-y: hidden;
+
+                // single category
+                .single-category{
+                    // TODO: how deos the "aspect-ratio" property works?
+                    //  aspect-ratio: ;
+
+                    min-width: 300px;
+                    margin: 0 0.3rem;
+                    font-family: $monospace;
+
+                    // category image
+                    .single-category-img{
+                        width: 100%;
+                        object-fit: cover;
+                        margin-bottom: 2rem;
+                    }
+                    // end of category image
+
+                    p{
+                        font-size: $small-text;
+                        color: $primary-blue;
+                    }
+
+                    *{
+                        // TODO: text-decoration not working
+                        text-decoration: none;
+                    }
+
+
+                }
+                // end of single category
+            }
+            // end of category slider
+        }
+        // end of category slide
+
+    }
+    // end of by category container
+ }
+
+
+
+
+// =======================
+// END OF SHOP BY CATEGORY SECTION
+// =======================
+
+
+
+
+
+
+
+
+// =======================
+// MORE TO EXPLORE SECTION
+// =======================
+
+
+
+.more-to-explore{
+    margin-bottom: 3rem;
+
+    // m-to-explore-con
+    .m-to-explore-con{
+        width: 90vw;
+        margin: 0 auto;
+        @include flex-space-center;
+        gap: 10%;
+
+        // explore left
+        .explore-left{
+            color: $primary-blue;
+            // width: 50%;
+
+            h4{
+                font-size: $lg-text;
+                font-weight: 500;
+
+            }
+
+            h2{
+                font-size: calc($xlg-text + 0.6rem);
+                font-weight: 500;
+                margin: 0.2rem 0;
+            }
+
+            p{
+                font-size: 1rem;
+            }
+
+        }
+        // end of explore left
+
+
+         // explore right
+         .explore-right{
+            width: 90%;
+
+            // explore slider
+            .explore-slider{
+                @include flex-align-center;
+                overflow-x: auto;
+
+                
+                // single explore
+                .single-explore{
+                    min-width: 40%;
+                    margin: 1rem;
+                    // height: 400px;
+
+                    img{
+                        width: 100%;
+                        object-fit: cover;
+                        height: 100%;
+                    }
+                }
+                // end of single explore
+            }
+            // end of slider
+         }
+         // end of explore right
+    }
+    // end of explore container
+}
+
+
+
+
+// =======================
+// END OF MORE TO SECTION
+// =======================
+
+
+
+
+
+
+   /* 
+=======================
+=======================
+SKATING SECTION
+=======================
+=======================
+ */
+
+
+
+  .skating{
+    // background: url(/ASSETS/IMAGES/general/skating-bg-img.jpg);
+    margin-bottom: 3rem;
+    @include background-norepeat-cover-center;
+    padding: 5rem 0;
+    @include flex-end-center ;
+    
+    .skating-con{
+        width: 50%;
+        // margin: 0 0 0 auto;
+        @include flex-center-center;
+        flex-direction: column;
+        // height: 100vh;
+
+        .skating-items{
+            // width: 40%;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        img{
+            width: 40%;
+            margin: auto;
+            
+        }
+
+        .skating-des{
+            font-size: calc($regular-text + 4px);
+            line-height: 1.5;
+            margin: 0 auto 1rem ;
+            color: $white;
+            width: 60%
+
+        }
+        a{
+            @include link-animate;
+            transition:  all 0.5s ease;
+            font-size: $small-text;
+        }
+
+        a:hover{
+            @include link-animated;
+        }
+
+
+
+    }
+
+  }
+
+
+
+
+
+
+ 
+    /* 
+=======================
+=======================
+END OF SKATING SECTION
+=======================
+=======================
+ */
+
+
+
+
+// =======================
+//  FOOTER SECTION
+// =======================
+
+footer{
+    border-top: solid 1px #999;
+    font-family: $monospace;
+
+
+    h3{
+        color: $primary-blue;
+        margin-bottom: 1rem;
+    }
+
+
+    a{
+        color: #000042;
+        text-decoration: none;
+        font-size: $small-text;
+        line-height: 2;
+    }
+
+    // footer container
+    .footer-con{
+        width: 95vw;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        padding: 2rem 0;
+
+
+        // }
+        // end of footer about
+
+
+        section{
+            border-right: 1px #999 solid;
+            margin-right: 2rem;
+
+        
+
+            .plus{
+                display: none;
+                font-size: 1.5rem;
+                font-weight: thin;
+                color: #333;
+            }
+        }
+
+        article{
+
+            order: 4;
+            h4{
+                margin-bottom: 1rem;
+                font-size: $regular-text;
+                font-weight: 600;
+                color: $primary-blue;
+            }
+
+            // enter email
+            .enter-email{
+                display: flex;
+                margin-bottom: 2rem;
+
+            }
+
+            input{
+                padding:  1rem;
+                font-size: calc($small-text - 1px);
+                width: 100%;
+            }
+
+            
+
+            #footer-email-input:focus{
+                outline: initial;
+                caret-color: $primary-blue;
+            }
+
+            .footer-newsletter-btn{
+                background-color: $primary-blue;
+                border: none;
+                color: $white;
+                cursor: pointer;
+                transition: all 0.2s ease-in;
+                width: 40%;
+            }
+
+             .footer-newsletter-btn:hover{
+                  background: $light-blue;
+             }
+
+            p{
+                font-size: $small-text;
+                line-height: 1.5;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+    // end of footer container
+
+
+
+
+
+    // FOOTER BOTTOM
+    .footer-bottom{
+
+        // social icons
+        .footer-social-icons{
+            padding: 2rem 0;
+            border-top: 1px #999 solid; border-bottom: 1px #999 solid;
+            @include flex-center-center;
+            gap: 1rem;
+
+            // icon
+            a{
+                color: $white;
+                font-size: $regular-text;
+                background: #4B5E96;
+                padding: 0.5rem 1rem;
+                font-weight: bold;
+            }
+        }
+        // end of social icons
+
+        // FOOTER COPYRIGHT
+        .footer-copyright{
+            padding: 2rem 0;
+            @include flex-center-center;
+        }
+        // END OF FOOTER COPYRIGHT
+    }
+    // END OF FOOTER CONTAINER
+}
+
+
+// =======================
+// END OF FOOTER SECTION
+// =======================
+
+

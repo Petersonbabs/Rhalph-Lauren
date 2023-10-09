@@ -1,0 +1,353 @@
+window._rlc.rlCustomJS(function() {
+
+    let isDesktop = window.matchMedia("(min-width: 768px)"),
+        refreshed = false;
+
+    const $scriptLoaderElm = document.getElementById('rlc-scripts')
+    ;
+
+    if ($scriptLoaderElm) {
+        if ($scriptLoaderElm.classList.contains('rlc-loaded')) {
+            buildStacks();
+        } else {
+            $scriptLoaderElm.addEventListener("SCRIPTS_LOADED", buildStacks);
+        }
+    }
+
+    function buildStacks() {
+        const cardStacks = document.querySelectorAll('.rlc-cardstack');
+
+        if (refreshed) {
+            /* FIRE QUICKSHOP ON PLPs */
+            if (document.querySelector('.pt_product-search-result') && document.querySelector('.is-quick-shoppable')) {
+                document.dispatchEvent(new CustomEvent('addQuickShop', {detail: {checkProducts: false, type: 'link'}}));
+            }
+        }
+
+        if (cardStacks.length != 0) {
+            gsap.registerPlugin(Draggable);
+            cardStacks.forEach(function ($element, index) {
+                cardStack($element);
+            });
+        }
+    }
+
+    document.addEventListener('productListingUpdated', function(){
+        if (refreshed) {
+            buildStacks();
+        }
+        refreshed = true;
+    }, false);
+    
+    function cardStack(el) {
+
+        const cardWrap = el,
+              cardStack = cardWrap.querySelector('.rlc-cards'),
+              duration = 3,
+              pausebutton = document.createElement('button'),
+              arrowPrev = document.createElement('button'),
+              arrowNext = document.createElement('button'),
+              counter = document.createElement('div'),
+              timer = document.createElement('div'),
+              timerBar = document.createElement('div')
+            ;
+
+            pausebutton.classList.add('rlc-looppause','rlc-button');
+            arrowPrev.classList.add('rlc-arrow-left','rlc-arrow','rlc-button');
+            arrowNext.classList.add('rlc-arrow-right','rlc-arrow','rlc-button');
+            counter.classList.add('rlc-counter');
+            counter.innerHTML = '<span></span>';
+            timer.classList.add('rlc-timer');
+            timerBar.classList.add('rlc-timer-bar');
+            timer.appendChild(timerBar);
+            cardWrap.appendChild(timer);
+            cardStack.appendChild(pausebutton);
+            cardStack.appendChild(arrowPrev);
+            cardStack.appendChild(arrowNext);
+            cardStack.appendChild(counter);
+
+        let cards = cardStack.querySelectorAll('.rlc-slide'),
+            activeIdx = 0,
+            tl = gsap.timeline({duration: 1.02,ease: "power2.inOut"}),
+            clicked = false,
+            moving = false,
+            cTop, cMid, cBot, cNxt, cCopy, cTopCopy,
+            left1, left2, left3, left4, left5,
+            top1, top2, top3, top4, top5
+        ;
+
+        function isHidden(elem) {
+            const styles = window.getComputedStyle(elem)
+            return styles.display === 'none';
+        }
+
+        cards.forEach(function ($element, index) {
+            if (isHidden($element)) {
+                $element.remove();
+            } 
+        });
+        cards = cardStack.querySelectorAll('.rlc-slide');
+
+        if (cards.length <= 3) {
+            console.log('DEVELOPER: The cardstack plugin needs a minimum of 4 cards to function');
+        }
+
+        function setSizes() {
+            left1 = percentage(7,(cMid.offsetWidth*1.12)),
+            left2 = percentage(0,cMid.offsetWidth),
+            left3 = percentage(7,(cMid.offsetWidth*0.9)),
+            left4 = percentage(15,(cMid.offsetWidth*0.75)),
+            left5 = percentage(35,(cMid.offsetWidth*0.6)),
+            top1 = percentage(7,(cMid.offsetHeight*1.12)),
+            top2 = percentage(0,cMid.offsetHeight),
+            top3 = percentage(7,(cMid.offsetHeight*0.9)),
+            top4 = percentage(23,(cMid.offsetHeight*0.75)),
+            top5 = percentage(42,(cMid.offsetHeight*0.6))
+        }
+
+        window.addEventListener("resize", function() {
+            setSizes()
+        });
+        
+
+        cards.forEach(function ($element, index) {
+            $element.setAttribute('data-num',(index+1));
+        });
+        cards[0].classList.add('rlc-active');
+        
+        function checkDuration(idx) {
+            activeIdx = idx;
+
+            if (cards[idx].dataset.duration) {
+                var tScale = duration/cards[idx].dataset.duration;
+                autoPlay.timeScale(tScale);
+            } else {
+                autoPlay.timeScale(1);
+            }
+        }
+
+        function setCards() {
+            cTop = cards[0];
+            cMid = cards[1];
+            cBot = cards[2];
+            cNxt = cards[3];
+            cCopy = cardStack.querySelectorAll('.rlc-copygroup');
+            cTopCopy = cTop.querySelector('.rlc-copygroup');
+            cTop.style.zIndex = "3";
+            cMid.style.zIndex = "2";
+            cBot.style.zIndex = "1";
+            cNxt.style.zIndex = "0";
+            cTop.style.opacity = 1;
+            cMid.style.opacity = 1;
+            cMid.style.left = left3+'px';
+            cMid.style.top = top3+'px';
+            cMid.style.transform = "scale(0.9)";
+            cBot.style.opacity = 1;
+            cBot.style.left = left4+'px';
+            cBot.style.top = top4+'px';
+            cBot.style.transform = "scale(0.75)";
+            cTopCopy.style.opacity = 1;
+        }
+        setCards();
+        setSizes();
+        counter.innerHTML = '<span>'+cTop.dataset.num+'</span><span>' + cards.length + '</span>';
+
+        cMid.style.left = left3+'px';
+        cBot.style.left = left4+'px';
+        cMid.style.top = top3+'px';
+        cBot.style.top = top4+'px';
+
+        function handleVideos() {
+            moving = false;
+            cards.forEach(function ($element, index) {
+                if ($element.classList.contains('rlc-active') && !cardWrap.classList.contains('user_paused')) {
+                    if ($element.querySelector('.rlc-hasvideo') != null) {
+                        $element.getElementsByTagName('video')[0].play();
+                    }
+                } else {
+                    if ($element.querySelector('.rlc-hasvideo') != null) {
+                        $element.getElementsByTagName('video')[0].pause();
+                    }
+                }
+            });
+        }
+        function percentage (p, t) { 
+            return parseInt((t*p)/100); 
+        } 
+
+        function pauseVids() {
+            cards.forEach(function ($element, index) {
+                if ($element.querySelector('.rlc-hasvideo') != null) {
+                    $element.getElementsByTagName('video')[0].pause();
+                }
+            });
+        }
+
+        function updateStack() {
+            moving = true;
+            checkDuration(1);
+            setCards();
+            tl = gsap.timeline({duration: 1.02, onComplete: handleVideos, onStart: pauseVids});
+            tl.to(cTopCopy, 0.3, {opacity: 0},0);
+            tl.fromTo(cTop, 0.7, {scale: 1, opacity: 1},{opacity: 0},0);
+            tl.fromTo(cTop, 1.02, {scale: 1, left: left2+'px', top: top2+'px'},{scale: 1.12, left: '-'+left1+'px', top: '-'+top1+'px'},0);
+            tl.fromTo(cMid, 1.02, {scale: 0.9, opacity: 1, left: left3+'px', top: top3+'px'},{scale: 1, opacity: 1, left: left2+'px', top: top2+'px'},0);
+            tl.fromTo(cBot, 1.02, {scale: 0.75, opacity: 1, left: left4+'px', top: top4+'px'},{scale: 0.9, opacity: 1, left: left3+'px', top: top3+'px'},0);
+            tl.fromTo(cNxt, 1.02, {scale: 0.6, opacity: 0,left: left5+'px', top: top5+'px'},{scale: 0.75, opacity: 1, left: left4+'px', top: top4+'px'},0);
+            tl.fromTo(cCopy, 0.5, {opacity: 0, x: '20px'},{opacity: 1, x: 0},0.4);
+            tl.fromTo(cTopCopy, 0.5, {opacity: 0},{opacity: 0, x: 0},0.4);
+            counter.innerHTML = '<span>'+cMid.dataset.num+'</span><span>' + cards.length + '</span>';
+            cards.forEach(function ($element, index) {
+                $element.classList.remove('rlc-active');
+            });
+            cMid.classList.add('rlc-active');
+        }
+
+        let autoPlay = null;
+        function letsGo() {
+            autoPlay = gsap.timeline({repeat: -1, duration: duration, onRepeat: loopThis,onStart: function(){checkDuration(0)}});
+            autoPlay.fromTo(timerBar, duration, {width: '0'},{width: '100%'},1.02);
+        }
+
+        cardWrap.addEventListener('ENTER_VIEWPORT',function(){
+            if (autoPlay == null) {
+                letsGo();
+            } else {
+                if (!cardWrap.classList.contains('user_paused')) {
+                    autoPlay.play();
+                }
+            }
+        });
+
+        if (cardWrap.classList.contains('rlc-isvisible')) {
+            if (autoPlay == null) {
+                letsGo();
+            }
+        }
+
+        cardWrap.addEventListener('LEAVE_VIEWPORT',function(){
+            if (autoPlay != null) {
+                autoPlay.pause();
+            }
+        });
+
+        function loopThis() {
+            cards = cardStack.querySelectorAll('.rlc-slide');
+            var lastCard = cards[0];
+            cardStack.appendChild(lastCard);  
+            updateStack();
+            clicked = false;
+        }
+
+        function loopBack() {
+            moving = true;
+            cards = cardStack.querySelectorAll('.rlc-slide');
+            const lastIdx = cards.length-1
+                lastCard = cards[lastIdx];
+                cardStack.insertBefore(lastCard, cardStack.firstChild);
+            checkDuration(0);
+            cards = cardStack.querySelectorAll('.rlc-slide');
+            setCards();
+
+            cTopCopy.style.opacity = 0;
+
+            tl = gsap.timeline({onComplete: handleVideos, onStart: pauseVids});
+            tl.fromTo(cCopy, 0.3, {opacity: 1},{opacity: 0},0);
+            tl.fromTo(cTop, 0.52, {opacity: 0},{opacity: 1},0);
+            tl.fromTo(cTop, 1.02, {scale: 1.12, left: '-'+left1+'px', top: '-'+top1+'px'},{scale: 1, left: left2+'px', top: top2+'px'},0);
+            tl.fromTo(cMid, 1.02, {scale: 1, opacity: 1, left: left2+'px', top: top2+'px'},{scale: 0.9, opacity: 1, left: left3+'px', top: top3+'px'},0);
+            tl.fromTo(cBot, 1.02, {scale: 0.9, opacity: 1, left: left3+'px', top: top3+'px'},{scale: 0.75, opacity: 1, left: left4+'px', top: top4+'px'},0);
+            tl.fromTo(cNxt, 1.02, {scale: 0.75, opacity: 1,left: left4+'px', top: top4+'px'},{scale: 0.6, opacity: 0, left: left5+'px', top: top5+'px'},0);
+            tl.fromTo(cTopCopy, 0.5, {opacity: 0, x: '20px'},{opacity: 1, x: 0},0.4);
+
+            counter.innerHTML = '<span>'+cTop.dataset.num+'</span><span>' + cards.length + '</span>';
+            cards.forEach(function ($element, index) {
+                $element.classList.remove('rlc-active');
+            });
+            cTop.classList.add('rlc-active');
+        }
+     
+        pausebutton.addEventListener('click',function(){
+            if (cardWrap.classList.contains('user_paused')) {
+                if (clicked) {
+                    autoPlay.seek(0);
+                    clicked = false;
+                }
+                autoPlay.play();
+                cardWrap.classList.remove('user_paused');
+                cards.forEach(function ($element, index) {
+                    if ($element.classList.contains('rlc-active')) {
+                        if ($element.querySelector('.rlc-hasvideo') != null) {
+                            
+                            $element.getElementsByTagName('video')[0].play();
+                        }
+                    }
+                });
+            } else {
+                autoPlay.pause();
+                cards.forEach(function ($element, index) {
+                    if ($element.classList.contains('rlc-active')) {
+                        if ($element.querySelector('.rlc-hasvideo') != null) {
+                            
+                            $element.getElementsByTagName('video')[0].pause();
+                        }
+                    }
+                });
+                cardWrap.classList.add('user_paused');
+            }
+        });
+
+        arrowNext.addEventListener('click',function(){
+            if (!moving) {
+                autoPlay.progress(1, false);
+                if (cardWrap.classList.contains('user_paused')) {
+                    loopThis();
+                }
+                clicked = true;
+            }
+        });
+
+        arrowPrev.addEventListener('click',function(){
+            if (!moving) {
+                autoPlay.seek(0);
+                loopBack();
+            }
+        });
+
+        var $proxy    = $("<div/>");
+        
+        Draggable.create($proxy, {
+            type: "x",
+            trigger: cardStack,
+            throwProps: true,
+            allowContextMenu: true,
+            onDragEnd: function() {
+                if (!moving) {
+                    var dir = this.getDirection();
+                    if (dir == 'left') {
+                        autoPlay.progress(1, false);
+                        if (cardWrap.classList.contains('user_paused')) {
+                            loopThis();
+                        }
+                        clicked = true;
+                    } else {
+                        autoPlay.seek(0);
+                        loopBack();
+                    }
+                }
+            }
+        });
+
+    }
+
+    return;
+
+
+});
+
+
+
+
+
+
+

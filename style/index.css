@@ -1,0 +1,471 @@
+@import url(_global.scss);
+/* 
+=======================
+=======================
+HERO SECTION
+=======================
+=======================
+ */
+.hero #hero-con #carousel-caption {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+.hero #hero-con #carousel-caption img {
+  width: 13rem;
+  margin-bottom: 1rem;
+}
+.hero #hero-con #carousel-caption p {
+  font-size: 15px;
+  width: 50%;
+  margin: 0 auto 1rem;
+}
+.hero #hero-con #carousel-caption h1 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 45px;
+}
+.hero #hero-con #carousel-caption .hero-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  text-decoration: none;
+}
+.hero #hero-con #carousel-caption .hero-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 10px;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 5px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 1s ease;
+}
+.hero #hero-con #carousel-caption .hero-links a:hover {
+  padding-bottom: 0;
+}
+
+/* 
+=======================
+=======================
+END OF HERO SECTION
+=======================
+=======================
+ */
+/* 
+=======================
+=======================
+POLO BEAR SECTION
+=======================
+=======================
+ */
+.polo-bear {
+  background: url(/ASSETS/IMAGES/general/0919_hp_c02_bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  padding: 5rem 0;
+  margin-bottom: 3rem;
+}
+.polo-bear .polo-bear-con {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 86vw;
+  margin: auto;
+}
+.polo-bear .polo-bear-con .p-bear-left {
+  width: 40%;
+  position: relative;
+  color: #fff;
+}
+.polo-bear .polo-bear-con .p-bear-left div {
+  height: 88%;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.polo-bear .polo-bear-con .p-bear-left div img {
+  width: 100%;
+}
+.polo-bear .polo-bear-con .p-bear-left section {
+  bottom: 0;
+}
+.polo-bear .polo-bear-con .p-bear-left section h2 {
+  font-family: times;
+  line-height: 1.5;
+}
+.polo-bear .polo-bear-con .p-bear-left section a {
+  color: #fff;
+  font-size: 12px;
+  font-family: monospace;
+  text-decoration: none;
+  border-bottom: 1px #fff solid;
+  padding-bottom: 0.5rem;
+  transition: all 0.8s ease;
+}
+.polo-bear .polo-bear-con .p-bear-left section a:hover {
+  padding-bottom: 0.2rem;
+}
+.polo-bear .polo-bear-con .polo-bear-right {
+  width: 40%;
+}
+.polo-bear .polo-bear-con .polo-bear-right h1 {
+  text-align: center;
+  font-size: 27px;
+  font-family: times;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: #041E3A;
+}
+.polo-bear .polo-bear-con .polo-bear-right .p-bear-slider img {
+  width: 100%;
+}
+
+/* 
+=======================
+=======================
+END OF POLO BEAR SECTION
+=======================
+=======================
+ */
+/* 
+=======================
+=======================
+ PINK PONNY SECTION
+=======================
+=======================
+ */
+#pink-pony-slider {
+  background-color: red;
+  position: relative;
+}
+
+#pink-pony-item {
+  position: absolute;
+  border: blue 1rem solid;
+  margin: 0 auto;
+}
+
+/* 
+=======================
+=======================
+END OF  PINK PONNY SECTION
+=======================
+=======================
+ */
+/* 
+=======================
+=======================
+BEAR SHOP SECTION
+=======================
+=======================
+ */
+.bear-shop {
+  background: url(/ASSETS/IMAGES/general/bear-shop-bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 4rem 0;
+  padding: 15rem 0;
+  width: 100%;
+}
+.bear-shop .b-shop-con {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+.bear-shop .b-shop-con div {
+  position: relative;
+}
+.bear-shop .b-shop-con .box-logo {
+  position: absolute;
+  left: 15%;
+  width: 8rem;
+}
+.bear-shop .b-shop-con h1 {
+  font-size: 135px;
+}
+.bear-shop .b-shop-con p {
+  font-size: 15px;
+  margin: 1rem 0;
+  font-family: "Times New Roman", Times, serif;
+}
+.bear-shop .b-shop-con a {
+  margin: 0 1rem;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid white;
+  padding-bottom: 5px;
+  transition: all 0.5s ease;
+}
+.bear-shop .b-shop-con a:hover {
+  padding-bottom: 0;
+}
+
+/* 
+=======================
+=======================
+END OF  BEAR SHOP SECTION
+=======================
+=======================
+ */
+/* 
+=======================
+=======================
+SKATING SECTION
+=======================
+=======================
+ */
+.skating {
+  background: url(/ASSETS/IMAGES/general/skating-bg-img.jpg);
+  margin-bottom: 3rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.skating .skating-con {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.skating .skating-con .skating-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
+}
+.skating .skating-con img {
+  width: 40%;
+  margin: auto;
+}
+.skating .skating-con .skating-des {
+  font-size: 19px;
+  line-height: 1.5;
+  margin: 0 auto 1rem;
+  color: #fff;
+  width: 60%;
+}
+.skating .skating-con a {
+  border-bottom: 1px solid #fff;
+  padding-bottom: 5px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.5s ease;
+  font-size: 12px;
+}
+.skating .skating-con a:hover {
+  padding-bottom: 0;
+}
+
+/* 
+=======================
+=======================
+END OF SKATING SECTION
+=======================
+=======================
+ */
+/* 
+=======================
+=======================
+LIVING SECTION
+=======================
+=======================
+*/
+.living {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  position: relative;
+}
+.living .living-con {
+  position: relative;
+  width: 90%;
+  height: 100%;
+}
+.living .living-con video {
+  z-index: -1;
+  position: absolute;
+}
+.living .living-con .living-items {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  top: 50%;
+  z-index: 9;
+  position: relative;
+}
+.living .living-con img {
+  width: 50%;
+  margin: 1rem auto 0;
+}
+.living .living-con .living-text {
+  font-family: times;
+  z-index: 999;
+  color: #fff;
+}
+.living .living-con .living-text h2 {
+  font-size: calc(35px + 1rem);
+}
+.living .living-con .living-text p {
+  font-size: 1rem;
+  line-height: 1;
+  margin: 1rem 0;
+}
+.living .living-con .living-text .living-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.living .living-con .living-text .living-links a {
+  text-decoration: none;
+  font-size: 12px;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 5px;
+  text-decoration: none;
+  color: #fff;
+  margin-bottom: 2rem;
+  color: #fff;
+  transition: all 0.8s ease;
+}
+.living .living-con .living-text .living-links a:hover {
+  padding-bottom: 0;
+}
+
+/* 
+=======================
+=======================
+END OF LIVING SECTION
+=======================
+=======================
+*/
+/* 
+=======================
+=======================
+DOUBLE RL SECTION
+=======================
+=======================
+*/
+.double-rl {
+  background: url(/ASSETS/IMAGES/general/rlc-bg.jpg);
+  height: 100vh;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.double-rl .double-rl-con {
+  position: absolute;
+  right: 3rem;
+  top: 3rem;
+  width: 50%;
+  text-align: center;
+}
+.double-rl .double-rl-con img {
+  width: 100%;
+}
+.double-rl .double-rl-con .rlc-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.double-rl .double-rl-con .rlc-links a {
+  color: #fff;
+  font-size: 12px;
+  text-decoration: none;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 5px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.5s ease;
+}
+.double-rl .double-rl-con .rlc-links a:hover {
+  padding-bottom: 0;
+}
+
+/* 
+=======================
+=======================
+END OF DOUBLE RL SECTION
+=======================
+=======================
+*/
+/* 
+=======================
+=======================
+MORE TO EXPLORE SECTION
+=======================
+=======================
+*/
+.homepage-explore {
+  padding: 4rem 0;
+}
+.homepage-explore .explore-title {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: "Times New Roman", Times, serif;
+}
+.homepage-explore .explore-title h2 {
+  font-weight: 500;
+}
+.homepage-explore .home-explore-con {
+  width: 70vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+.homepage-explore .home-explore-con .single-explore {
+  width: 30%;
+  height: 100%;
+  padding: 1rem;
+}
+.homepage-explore .home-explore-con .single-explore img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.homepage-explore .home-explore-con .single-explore .explore-text {
+  text-align: center;
+  margin-top: 1rem;
+}
+.homepage-explore .home-explore-con .single-explore .explore-text p {
+  font-size: 27px;
+}
+.homepage-explore .home-explore-con .single-explore .explore-text a {
+  text-decoration: none;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 5px;
+  text-decoration: none;
+  color: #fff;
+  border-bottom: 1px solid #041E3A;
+  padding-bottom: 8px;
+  transition: all 0.5s ease;
+  font-family: Helvetica, sans-serif;
+}
+.homepage-explore .home-explore-con .single-explore .explore-text a:hover {
+  padding: 2px;
+}
+.homepage-explore .home-explore-con .single-explore .explore-text p, .homepage-explore .home-explore-con .single-explore .explore-text a {
+  color: #041E3A;
+  font-family: Courier, monospace;
+  font-weight: 600;
+}
+
+/* 
+=======================
+=======================
+MORE TO EXPLORE SECTION
+=======================
+=======================
+*//*# sourceMappingURL=index.css.map */

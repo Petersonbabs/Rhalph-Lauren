@@ -1,0 +1,176 @@
+window._rlc.rlCustomJS(function () {
+
+    var isDesktop = window.matchMedia("(min-width: 768px)");
+
+    const $scriptLoaderElm = document.getElementById('rlc-scripts');
+    
+    if ($scriptLoaderElm) {
+        if ($scriptLoaderElm.classList.contains('rlc-loaded')) {
+            stickyslidernav();
+        } else {
+            $scriptLoaderElm.addEventListener("SCRIPTS_LOADED", stickyslidernav);
+        }
+    }
+    
+
+    // FADE SLIDER CODE:
+
+    function stickyslidernav() {
+        var baseTag = document.getElementsByTagName( 'html' )[0];
+        function check_iOS() {
+            return [
+                'iPad Simulator',
+                'iPhone Simulator',
+                'iPod Simulator',
+                'iPad',
+                'iPhone',
+                'iPod'
+            ].includes(navigator.platform)
+            // iPad on iOS 13 detection
+            || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+        }
+        
+
+
+        const ssn = document.getElementById("rlc-stickyswipernav"),
+            ssn_slider = ssn.querySelector('.rlc-stickyswiper'),
+            ssn_slides = ssn_slider.querySelectorAll('.rlc-slide'),
+            ssn_track = ssn_slider.querySelector('.rlc-track'),
+            ssn_indicatorID = document.getElementById("rlc-indicator"),
+            rlcontent = document.getElementById("rl-content"),
+            header = document.getElementsByTagName("header"),
+            mainNav = document.querySelector(".top-banner")
+        ;
+        let ssn_jumppoints = [],
+            curr = 0,
+            clicked = false,
+            currSlide = 0,
+            trackwidth = 0,
+            trackperc = 0,
+            headerHeight = header[0].offsetHeight,
+            scrollEl = window;
+        ;
+
+        let isIOS = check_iOS();
+        // if (isIOS) {
+        //     baseTag.className += ' rlc-ios';
+        //     scrollEl = document.body;
+        // }
+
+        let mainNavHeight = mainNav.offsetHeight,
+            stickyNavHeight = ssn.offsetHeight,
+            thumbHeight = 0;
+            
+        let root = document.documentElement;
+        root.style.setProperty("--sNav-RLNavHeight", mainNavHeight + "px");
+        root.style.setProperty("--sNav-sNavHeight", stickyNavHeight + "px");
+        root.style.setProperty("--sNav-thumbHeight", thumbHeight + "px");
+
+        //REGISTER SCROLLTRIGGER:
+
+        gsap.registerPlugin(ScrollTrigger);
+       // gsap.registerPlugin(ScrollToPlugin);
+
+       
+
+        // function moveIndicator(target){
+        //     var i = trackperc/ssn_slides.length,
+        //         moveLeft = 0
+        //     ;
+        //     if (i >= 1) {
+        //         moveLeft = i*target;
+        //     }
+        //     currSlide = ssn_slides[target];
+        //     ssn_indicator.style.left = currSlide.offsetLeft+'px';
+        //     ssn_track.scrollTo({
+        //         left: moveLeft,
+        //         behavior: 'smooth'
+        //     })
+        // };
+
+        function moveIndicator(target, $element) {
+            currSlide = ssn_slides[target];
+            ssn_indicatorID.style.left = currSlide.offsetLeft + "px";
+            ssn_indicatorID.style.width = currSlide.offsetWidth + "px";
+
+            ssn_track.scrollTo({
+                left: currSlide.offsetLeft - 25,
+                behavior: "smooth",
+            });
+        }
+
+        function activateSlide(idx) {
+            ssn_slides.forEach(function ($element, index) {
+                $element.classList.remove("rlc-active");
+            });
+            moveIndicator(idx);
+            currSlide.classList.add("rlc-active");
+            currIdx = idx;
+        } 
+
+        function fadeMove(oT,index) {
+            if (isIOS) {
+                baseTag.style.scrollSnapType = 'none';
+                setTimeout(function(){
+                    baseTag.style.scrollSnapType = 'y mandatory';
+                },1000);
+            }
+            scrollEl.scrollTo({
+                top: oT,
+                behavior: 'smooth'
+            });
+            clicked = false;
+        }
+        
+        ssn_slides.forEach(function ($element, index) {
+            const jumpref = $element.dataset.jump,
+                jumpto = document.getElementById(jumpref)
+            ;
+            ssn_jumppoints.push(jumpto);
+
+            var styles = getComputedStyle($element);
+            
+            trackwidth = trackwidth+$element.offsetWidth+parseFloat(styles.marginRight);
+
+            $element.addEventListener("click", function(e){
+                e.stopPropagation();
+                let oT = jumpto.offsetTop;
+                clicked = true;
+                fadeMove(oT,index);
+                return false;
+            });
+    
+            curr++
+            if (curr === ssn_slides.length) {
+                trackperc = trackwidth-ssn_track.offsetWidth;
+                ssn_jumppoints.forEach(function ($element, index) {
+                    ScrollTrigger.create({
+                        start: 'top 70%',
+                        end: 'bottom 70%',
+                        scroller: scrollEl,
+                        trigger: $element,
+                        onEnter: function() {
+                            if (!clicked) {
+                                activateSlide(index);
+                            }
+                        },
+                        onEnterBack: function() {
+                            if (!clicked) {
+                                activateSlide(index);
+                            }
+                        }
+                    });
+                    
+                });
+
+            }
+        });
+    
+    
+        
+        
+    }
+
+
+    return;
+});

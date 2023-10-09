@@ -1,0 +1,593 @@
+// TODO: add class to higher level os flyouts so we know which and when content exists. For extending height of flyouts on larger screens and identifying levels
+window._rlc.rlCustomJS(function() {
+    let isDesktop = window.matchMedia("(min-width: 768px)");
+
+    let device = 'desktop';
+    if (!isDesktop.matches) {
+        device = 'mobile';
+    }
+    document.body.dataset.device = device;
+
+    window.CAROUSEL_READY = new Event('CAROUSEL_READY');
+
+
+
+    /* *********************** */
+    /* *********************** */
+    /* START CAROUSEL JS */
+    /* THIS IS A MODIFIED VERSION OF THE CAROUSEL JS FROM CREATIVE JS v1.2.6.1 */
+    /* *********************** */
+        // added loop, autoplay, pagination, scrollbar, and centeredslides attributes by device
+        // "all" "mobile" "desktop" "none" default "none"
+        // LOOP defaults to true except for scrollbar
+        // centeredslides defaults to true except for scrollbar
+    
+        // SETUP EVENTS
+        if(typeof(Event) === 'function') {
+            window.CAROUSEL_READY = new Event('CAROUSEL_READY');
+        }
+    
+    function rlc_carousels () {
+        function RL_Carousels () {
+            // console.log('RL_Carousels');
+        
+            // CAROUSELS
+            const $carousels = document.querySelectorAll(".rlc-carousel_flyout");
+        
+            // console.log('GET CAROUSELS',$carousels);
+            $carousels.forEach(function ($carousel) {
+                // console.log('BUILD CAROUSEL forEach',$carousel);
+                // CHECK IF CAROUSEL ALREADY BUILT
+                if (!$carousel.classList.contains('rlc-carousel--ready')) {
+                    buildCarousel ($carousel);
+                }
+            });
+        
+            // BUILD CAROUSEL
+            function buildCarousel ($carousel) {
+                // console.log('buildCarousel',$carousel, $carousel.attributes);
+                let config = getConfig ( $carousel ); 
+        
+                $carousel.classList.add('rlc-carousel-nointeraction');
+        
+                $carousel.dataset.currentslide = 1;
+
+                // TODO: remove slides with display none;
+                removeHiddenSlides ($carousel);
+
+                $carousel.dataset.slidecount = $carousel.querySelectorAll('.rlc-slide').length;
+
+                let min_slides = 1;
+                if ($carousel.attributes.minslides) {
+                    min_slides = Number($carousel.attributes.minslides.value) - 1;
+                }
+
+                // ONLY BUILD IF SLIDE COUNT IS GREATER THAN ONE
+                if ( $carousel.dataset.slidecount > min_slides ) {
+
+                    // ALLOW CUSTOM INITIALIZING OF SWIPER
+                    let $carouselElm = $carousel;
+            
+                    // WRAPPER FOR CONTROL OF OVERFLOW TO SHOW OTHER SLIDES
+                    if ($carousel.querySelector('.rlc-carousel_wrapper')) {
+                        $carouselElm = $carousel.querySelector('.rlc-carousel_wrapper');
+                    }
+            
+                    addControls ( $carouselElm, $carousel, config );
+                    addADA ( $carousel );
+            
+                    let swiper = new Swiper($carouselElm, config);
+            
+                    swiper.on('init', function () {
+                        // console.log("ACTIVE SLIDE", this.el.querySelector('.swiper-slide-active'));
+            
+                        if (needsLazyLoader) {
+                            window._rlc.lazyLoader();
+                        }
+            
+                        let $activeSlide = this.el.querySelector('.swiper-slide-active');
+            
+                        if ($activeSlide) {
+                            $activeSlide.removeAttribute('aria-hidden');
+            
+                            // updateSlideADA ($activeSlide);
+                            updateControlADA ( $activeSlide, $carousel );
+                            
+                            addSlideADAListeners ( $carousel );
+                        }
+            
+                        // Re init quickshop
+                        let $QS_Carousel = $carousel.querySelectorAll('.is-quick-shoppable');
+                        if ($QS_Carousel && $QS_Carousel.length > 0) {
+                            document.dispatchEvent(new CustomEvent('addQuickShop', {detail: {checkProducts: false, type: 'link'}}));
+                        }
+            
+                        window._rlc.inView($carousel);
+                    });
+                    swiper.on('touchMove', function () {
+                        let $carousel = this.el;
+                        if (!$carousel.classList.contains('rlc-carousel_flyout')) {
+                            $carousel = this.el.closest('.rlc-carousel_flyout');
+                        }
+                        $carousel.classList.add('isDragging');
+                    });
+                    swiper.on('touchEnd', function () {
+                        let $carousel = this.el;
+                        if (!$carousel.classList.contains('rlc-carousel_flyout')) {
+                            $carousel = this.el.closest('.rlc-carousel_flyout');
+                        }
+                        $carousel.classList.remove('isDragging');
+                    });
+                    swiper.on('transitionStart', function () {
+                        let $carousel = this.el;
+                        if (!$carousel.classList.contains('rlc-carousel_flyout')) {
+                            $carousel = this.el.closest('.rlc-carousel_flyout');
+                        }
+                        $carousel.classList.add('inTransition');
+                    });
+                    swiper.on('slidePrevTransitionStart', function () {
+                        let $carousel = this.el;
+                        if (!$carousel.classList.contains('rlc-carousel_flyout')) {
+                            $carousel = this.el.closest('.rlc-carousel_flyout');
+                        }
+                        $carousel.classList.add('inTransitionPrev');
+                    });
+                    swiper.on('slidePrevTransitionEnd', function () {
+                        let $carousel = this.el;
+                        if (!$carousel.classList.contains('rlc-carousel_flyout')) {
+                            $carousel = this.el.closest('.rlc-carousel_flyout');
+                        }
+                        $carousel.classList.remove('inTransitionPrev');
+                    });
+                    swiper.on('transitionEnd', function () {
+                        // console.log("slideChange",this.previousIndex,this.realIndex, this.activeIndex, this.el);
+                        // window._rlc.inView();
+                        let $carousel = this.el;
+                        if (!$carousel.classList.contains('rlc-carousel_flyout')) {
+                            $carousel = this.el.closest('.rlc-carousel_flyout');
+                        }
+                        $carousel.classList.remove('inTransition');
+            
+                        if(this.previousIndex > 0 || $carousel.classList.contains('rlc-category_carousel')) { // use previousIndex because all other Index properties are wrong
+                            $carousel.classList.remove('rlc-carousel-nointeraction');
+                        }
+            
+                        // console.log("ACTIVE SLIDE", this.el.querySelector('.swiper-slide-active'));
+                        let $activeSlide = this.el.querySelector('.swiper-slide-active');
+            
+                        // GET ACTIVE SLIDE DATA INDEX BECAUSE SWIPER INDEX IS WRONG
+                        // console.log("$carousel",$carousel);
+                        if(this.previousIndex > 0) { // use previousIndex to stop swiper from breaking on load
+                            // console.log("CAROUSEL END",$carousel.dataset.currentslide,$carousel.dataset.slidecount);
+                            // ADD DATA ATTRIBUTE FOR CURRENT SLIDE
+                            $carousel.dataset.currentslide = (parseInt($activeSlide.dataset.swiperSlideIndex) + 1);
+            
+                            // ADD CLASS FOR LAST SLIDE - DO IT THIS WONKY WAY BECAUSE SWIPER INDEX IS WRONG
+                            if ($carousel.dataset.currentslide == $carousel.dataset.slidecount) {
+                                $carousel.classList.add('rlc-last_slide');
+                            } else {
+                                $carousel.classList.remove('rlc-last_slide');
+                            }
+                        }
+                        
+                        // FIRE EVENTS
+            
+                        if ($activeSlide) {
+                            // console.log("IS ACTIVE SLIDE",$activeSlide);
+                            $activeSlide.classList.add('rlc-isvisible');
+            
+                            if (!$carousel.classList.contains('rlc-carousel-nointeraction')) {
+                                // console.log('TRANS END updateSlideADA');
+                                updateSlideADA ( $activeSlide, $carousel );
+                            }
+                        }
+                    });
+            
+
+                    // refire inview to fix first slide not showing
+                    document.addEventListener('contentChanged', function(){
+                        setTimeout(function(){
+                            // console.log('refire inview');
+                            window._rlc.inView($carousel);
+                        },350);
+                    }, false);
+
+                        // ALLOW OVERRIDE OF INIT TO ADD CUSTOM EVENTS
+                    // TODO: ALLOW INIT BY DEVICE TYPE
+                    if (!config.customjs) {
+                        swiper.init();
+                    }
+            
+                    $carousel.swiper = swiper;
+            
+                    $carousel.classList.add('rlc-carousel--ready');
+                    $carousel.dispatchEvent(CAROUSEL_READY);
+
+
+                    // Fix for off-center slides
+                    if ($carousel.classList.contains('.rlc-block')) {
+                        $carousel.addEventListener("ENTER_VIEWPORT", function() {
+                            // console.log("$carousel ENTER_VIEWPORT",$carousel,$carousel.swiper);
+                            $carousel.swiper.update();
+                        }, {once:true});
+                    } else if ($carousel.closest('.rlc-block')) {
+                        $carousel.closest('.rlc-block').addEventListener("ENTER_VIEWPORT", function() {
+                            // console.log("$carousel parent ENTER_VIEWPORT",$carousel,$carousel.swiper);
+                            $carousel.swiper.update();
+                        }, {once:true});
+                    }
+                }
+            }
+        
+            // Remove hidden slides
+            function removeHiddenSlides ($carousel) {
+                $slides = $carousel.querySelectorAll('.rlc-slide');
+
+                if ($slides) {
+                    $slides.forEach(function ($slide) {
+                        // console.log('SLIDE STYLE',$slide,$slide.style, window.getComputedStyle($slide, null).display);
+                        if ( window.getComputedStyle($slide, null).display == 'none' ) {
+                            $slide.remove();
+                        }
+                    });
+                }
+            }
+
+            // handle resize
+            function updateCarousels () {
+                // console.log('updateCarousels');
+                $carousels.forEach(function ($carousel) {
+                    let $carouselElm = $carousel;
+        
+                    // WRAPPER FOR CONTROL OF OVERFLOW TO SHOW OTHER SLIDES
+                    if ($carousel.querySelector('.rlc-carousel_wrapper')) {
+                        $carouselElm = $carousel.querySelector('.rlc-carousel_wrapper');
+                    }
+                    if ($carouselElm.swiper) {
+                        // console.log('updateSize');
+                        $carouselElm.swiper.updateSize();
+                        $carouselElm.swiper.slideTo(0);
+                    }
+                });
+            }
+        
+            function addControls ( $carousel, $parent, config ) {
+                // console.log('addControls', config, $parent.attributes);
+                if (config.navigation && !$carousel.querySelector('.swiper-button-next')) {
+                    // Add Left Arrow
+                    let $arrowLeft = document.createElement("button");
+                    $arrowLeft.classList.add("rlc-carousel-arrow", "rlc-carousel-arrow-left", "swiper-button-prev");
+                    $carousel.appendChild($arrowLeft);
+        
+                    // Add Right Arrow
+                    let $arrowRight = document.createElement("button");
+                    $arrowRight.classList.add("rlc-carousel-arrow", "rlc-carousel-arrow-right", "swiper-button-next");
+                    $carousel.appendChild($arrowRight);
+                }
+        
+                if ($parent.attributes.scrollbar && !$carousel.querySelector('.swiper-scrollbar')) {
+                    // Add Scrollbar
+                    let $scrollbar = document.createElement("div");
+                    $scrollbar.classList.add("rlc-carousel-scrollbar", "swiper-scrollbar");
+                    $carousel.appendChild($scrollbar);
+                }
+        
+                if ($parent.attributes.pagination && !$carousel.querySelector('.swiper-pagination')) {
+                    // Add Pagination
+                    let $pagination = document.createElement("div");
+                    $pagination.classList.add("rlc-carousel-pagination", "swiper-pagination");
+                    $carousel.appendChild($pagination);
+                }
+            }
+        
+            function addADA ( $carousel ) {
+                if (!$carousel.attributes['role']) {
+                    $carousel.setAttribute("role", "navigation");
+                }
+                if (!$carousel.attributes['aria-label']) {
+                    $carousel.setAttribute("aria-label","navigation");
+                }
+                let $slides = $carousel.querySelectorAll('.rlc-slide');
+                let slideQty = $slides.length;
+                $slides.forEach(function ($this, index) {
+                    $this.setAttribute("aria-hidden", 'true');
+                });
+        
+                // Add live region
+                let $liveregion = document.createElement("div");
+                $liveregion.classList.add("rlc-liveregion", "rlc-visuallyhidden");
+                $liveregion.setAttribute("aria-live","polite");
+                $liveregion.setAttribute("aria-atomic","true");
+                $carousel.appendChild($liveregion);
+        
+            }
+            function updateSlideADA ( $activeSlide, $carousel ) {
+                // console.log('updateSlideADA $activeSlide',$activeSlide,$carousel);
+                // $activeSlide.setAttribute('tabindex','0');
+                $activeSlide.removeAttribute('aria-hidden');
+        
+                // DON'T ANNOUNCE ON INIT
+                if (!$carousel.classList.contains('rlc-carousel-nointeraction')) {
+                    $carousel.querySelector('.rlc-liveregion').textContent = 'Item ' + (parseInt($activeSlide.dataset.swiperSlideIndex) + 1) + ' of ' + $carousel.dataset.slidecount;
+                }
+        
+                $activeSlide.setAttribute('tabindex','-1');
+                $activeSlide.setAttribute('aria-label','Slide ' + (parseInt($activeSlide.dataset.swiperSlideIndex) + 1) + ' (Current)');
+                $activeSlide.focus({
+                    preventScroll: true
+                });
+        
+                updateControlADA ( $activeSlide, $carousel );
+            }
+        
+            function addSlideADAListeners ( $carousel ) {
+                $carousel.querySelectorAll('.rlc-slide').forEach(function($slide){
+                    $slide.addEventListener("ENTER_VIEWPORT", function() {
+                        this.removeAttribute('aria-hidden');
+                    });
+                    $slide.addEventListener("LEAVE_VIEWPORT", function() {
+                        this.removeAttribute('tabindex');
+                        this.setAttribute('aria-hidden','true');
+        
+                        this.removeAttribute('aria-label');
+                    });
+                });
+            }
+
+            function updateControlADA ( $activeSlide, $carousel ) {
+                let $pagination = $carousel.querySelector('.swiper-pagination');
+                if ($pagination && $pagination.querySelector('.swiper-pagination-bullet-active')) {
+                    let $activeBullet = $pagination.querySelector('.swiper-pagination-bullet-active');
+                    $activeBullet.setAttribute('aria-label','Go to Slide ' + (parseInt($activeSlide.dataset.swiperSlideIndex) + 1) + ' (Current)');
+        
+                    for (var i = 0; i < $pagination.children.length; i++) {
+                        let $sibling = $pagination.children[i];
+                        if ($sibling !== $activeBullet) {
+                            $sibling.setAttribute('aria-label','Go to Slide ' + (i + 1));
+                        }
+                    }
+                }
+            }
+        
+            function getConfig ( $carousel ) {
+                // console.log('getConfig',$carousel,$carousel.attributes);
+                // expects format: data-config="'loop': true,'left':20"
+                let config;
+                let configAttr = $carousel.attributes;
+                // console.log('configAttr',configAttr);
+                if ($carousel.dataset.config && $carousel.dataset.config.length > 0) {
+                    // console.log("CUSTOM CAROUSEL");
+                    if ($carousel.dataset.config == 'custom') {
+                        config = 'custom';
+                    } else {
+                        config = JSON.parse("{" + $carousel.dataset.config.replace(/'/gi,'"') + "}");
+                        config.custom = true;
+                        config.init = false;
+                    }
+                } else {
+                    config = {
+                        version: '6',
+                        loop: false,
+                        slidesPerView: 'auto',
+                        centeredSlides: false,
+                        speed: 600,
+        
+                        breakpoints: {
+                            // MOBILE
+                            0: {
+        
+                            },
+                            // DESKTOP
+                            768: {
+        
+                            }
+                        },
+        
+                        // Navigation arrows
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+        
+                        mousewheel: {
+                            forceToAxis: true,
+                            sensitivity: 1
+                        },
+        
+                        init: false
+                    };
+        
+                }
+                // ADD TO CONFIG FROM ATTRIBUTES
+                // SCROLLBAR
+                if (configAttr['scrollbar']) {
+                    addScrollbarConfig ();
+                }
+                // PAGINATION
+                if (configAttr['pagination']) {
+                    addPaginationConfig ();
+                }
+                // AUTOPLAY - DEFAULT = false
+                if (configAttr['autoplay']) {
+                    addAutoplayConfig ();
+                }
+                // LOOP - DEFAULT = true
+                if (configAttr['loop']) {
+                    addLoopConfig ();
+                }
+                // CENTERED SLIDEDS - DEFAULT = true
+                if (configAttr['centeredslides']) {
+                    addCenteredConfig ();
+                }
+        
+                return config;
+        
+                // SCROLLBAR
+                function addScrollbarConfig () {
+                    // console.log('addScrollbarConfig',configAttr['scrollbar'].value, config);
+                    if ($carousel.attributes.scrollbar) {
+                        let scrollbarAttr = $carousel.attributes.scrollbar;
+        
+                        config.breakpoints[768].freeMode = false;
+                        config.breakpoints[768].resistance = true;
+        
+                        if (scrollbarAttr.value) {
+                            if ('all' == scrollbarAttr.value) {
+                                addSbConfig (config);
+                            } else if ('mobile' == scrollbarAttr.value) {
+                                addSbConfig (config.breakpoints[0]);
+                            } else if ('desktop' == scrollbarAttr.value) {
+                                addSbConfig (config.breakpoints[768]);
+                            }
+                        }
+                    }
+        
+                    function addSbConfig (configSection) {
+                        configSection.loop = false;
+                        configSection.centeredSlides = false;
+        
+                        configSection.scrollbar = {
+                            el: '.swiper-scrollbar',
+                            hide: false,
+                            //draggable: true,
+                            dragSize: 200//,
+                            //snapOnRelease: false
+                        };
+        
+                    }
+                }
+        
+                // PAGINATION
+                function addPaginationConfig () {
+                    // console.log('addPaginationConfig',configAttr['pagination'].value, config);
+                    if ($carousel.attributes.pagination) {
+                        let paginationAttr = $carousel.attributes.pagination;
+                        if (paginationAttr.value) {
+                            if ('all' == paginationAttr.value) {
+                                addPgConfig (config);
+                            } else if ('mobile' == paginationAttr.value) {
+                                addPgConfig (config.breakpoints[0]);
+                            } else if ('desktop' == paginationAttr.value) {
+                                addPgConfig (config.breakpoints[768]);
+                            }
+                        }
+                    }
+                    function addPgConfig (configSection) {
+                        // console.log('addPgConfig',configSection);
+                        configSection.pagination = {
+                            el: '.swiper-pagination',
+                            type: 'fraction',
+                            clickable: true
+                        }
+                    }
+                }
+        
+                // AUTOPLAY
+                function addAutoplayConfig () {
+                    if ($carousel.attributes.autoplay) {
+                        let autoplayAttr = $carousel.attributes.autoplay;
+                        if (autoplayAttr.value) {
+                            if ('all' == autoplayAttr.value) {
+                                addApConfig (config);
+                            } else if ('mobile' == autoplayAttr.value) {
+                                addApConfig (config.breakpoints[0]);
+                            } else if ('desktop' == autoplayAttr.value) {
+                                addApConfig (config.breakpoints[768]);
+                            }
+                        }
+                    }
+                    function addApConfig (configSection) {
+                        configSection.autoplay = {
+                            delay: 5000,
+                        }
+                    }
+                }
+        
+                // LOOP
+                function addLoopConfig () {
+                    if ($carousel.attributes.loop) {
+                        let loopAttr = $carousel.attributes.loop;
+                        if (loopAttr.value) {
+                            if ('all' != loopAttr.value) {
+                                config.loop = false;
+                            }
+                            if ('mobile' == loopAttr.value) {
+                                addLoopConfig (config.breakpoints[0]);
+                            } else if ('desktop' == loopAttr.value) {
+                                addLoopConfig (config.breakpoints[768]);
+                            }
+                        }
+                    }
+                    function addLoopConfig (configSection) {
+                        configSection.loop = true;
+                    }
+                }
+        
+                // CENTERED SLIDES
+                function addCenteredConfig () {
+                    if ($carousel.attributes.centeredslides) {
+                        let centeredAttr = $carousel.attributes.centeredslides;
+                        if (centeredAttr.value) {
+                            if ('all' != centeredAttr.value) {
+                                config.centeredSlides = false;
+                            }
+                            if ('mobile' == centeredAttr.value) {
+                                addCenteredConfig (config.breakpoints[0]);
+                            } else if ('desktop' == centeredAttr.value) {
+                                addCenteredConfig (config.breakpoints[768]);
+                            }
+                        }
+                    }
+                    function addCenteredConfig (configSection) {
+                        configSection.centeredSlides = true;
+                    }
+                }
+                
+            }
+        
+            // ****************************************
+        
+            addEventListener('resize', updateCarousels, false);
+            document.addEventListener('contentChanged', updateCarousels, false);
+
+            // TELL THE WORLD THE CAROUSELS HAVE BEEN INITIALIZED
+            window._rlc.carouselsActive = true;
+        }
+        
+        const needsLazyLoader = (document.querySelectorAll('.rlc-lazyLoad').length > 0);
+        
+        // CACHE FOR REPEAT CHECK
+        function init () {
+            // console.log('CARSOUEL INIT');
+            // CHECK inView MODULE IS READY AND lazyLoader IF NEEDED
+            let viewInitCheck = setInterval(function(){
+                if (typeof window._rlc.inView == 'function' 
+                    && ((!needsLazyLoader) 
+                        || (needsLazyLoader 
+                                && typeof window._rlc.lazyLoader == 'function'))
+                    ) {
+                    clearInterval(viewInitCheck);
+                    RL_Carousels();
+                }
+            }, 150);
+        }
+
+        init ();
+        
+        // PLP Filter change listener
+        document.addEventListener('productListingUpdated', init, false);
+        
+        // PDP Content change listener
+        document.addEventListener('contentChanged', init, false);
+    }
+    
+    // check to prevent carousel js from firing twice if duplicate inclusion
+    if (!window._rlc.carousels) {
+        rlc_carousels ();
+        window._rlc.carousels = rlc_carousels ();
+    }
+
+    /* END CAROUSEL JS */
+    /* *********************** */
+
+});

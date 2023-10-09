@@ -1,0 +1,509 @@
+window._rlc.rlCustomJS(function () {
+
+    const $scriptLoaderElm = document.getElementById('rlc-scripts');
+
+    if ($scriptLoaderElm) {
+        // CHECK IF SCRIPTS HAVE ALREADY LOADED
+        if ($scriptLoaderElm.classList.contains('rlc-loaded')) {
+            buildFS();
+        } else {
+            // LISTEN FOR EVENT
+            $scriptLoaderElm.addEventListener("SCRIPTS_LOADED", buildFS);
+        }
+    }
+
+    function buildFS() {
+
+        // REGISTER SCROLLTRIGGER:
+
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(Draggable);
+
+        var isDesktop = window.matchMedia("(min-width: 768px)");
+
+
+        // FADE SLIDER CODE:
+
+        const fadeleftsliders = document.querySelectorAll(".rlc-fadeslider2");
+
+        fadeleftsliders.forEach(function ($element, index) {
+            const slider = $element,
+                arrowPrev = document.createElement('button'),
+                arrowNext = document.createElement('button'),
+                progressWrapper = document.createElement('div'),
+                progressBar = document.createElement('div'),
+                progressLine = document.createElement('div'),
+                pagination = document.createElement('div'),
+                proxy = document.createElement("div"),
+                copyGroups = slider.querySelectorAll('.rlc-copygroup'),
+                videoContainers = slider.querySelectorAll('.rlc-videocontainer'),
+                wrapper = slider.querySelector('.rlc-slidewrapper')
+            ;
+
+            let slides = slider.querySelectorAll('.rlc-slide'),
+                activeIdx = 0,
+                autoplay = false,
+                duration = 4000,
+                dur = null,
+                sliderWidth = slider.offsetWidth,
+                startProg = 0,
+                sDir = 'left',
+                nextSlide = slides[activeIdx],
+                prevIdx = 0,
+                prevSlide = slides[0],
+                nextTL = null,
+                sMax = 0,
+                sCancel = false,
+                interacted = false,
+                pauseButton = null,
+                countSeconds = null,
+                seconds = 1,
+                hasVideo = false,
+                prog = gsap.timeline(),
+                paused = false,
+                visibles = 0
+            ;
+            window.LOAD_IMAGE = new Event('LOAD_IMAGE');
+
+            if (videoContainers.length != 0) {
+                hasVideo = true;
+            }
+
+            function isHidden(elem) {
+                const styles = window.getComputedStyle(elem)
+                return styles.display === 'none'
+            }
+
+            var sinc = 0;
+            slides.forEach(function ($element, index) {
+                sinc++;
+                if (isHidden($element)) {
+                    $element.remove();
+                }  else {
+                    visibles++; 
+                }
+            });
+
+            if (visibles == 1) {
+                slider.classList.add('rlc-single');
+                return;
+            }
+
+            // CREATE ARROWS AND PAGINATION:
+            progressWrapper.setAttribute("class", "rlc-progresswrap");
+            progressBar.setAttribute("class", "rlc-progressbar");
+            progressLine.setAttribute("class", "rlc-progressline");
+            pagination.setAttribute("class", "rlc-pagination");
+            arrowPrev.setAttribute("class", "rlc-carousel-arrow rlc-carousel-arrow-left");
+            arrowPrev.setAttribute("aria-label", "Previous slide");
+            arrowNext.setAttribute("class", "rlc-carousel-arrow rlc-carousel-arrow-right");
+            arrowNext.setAttribute("aria-label", "Next slide");
+            arrowPrev.setAttribute("tabindex", 0);
+            arrowNext.setAttribute("tabindex", 0);
+            arrowPrev.setAttribute("role", "button");
+            arrowNext.setAttribute("role", "button");
+            wrapper.parentNode.insertBefore(progressWrapper,wrapper);
+            progressWrapper.appendChild(progressBar);
+            progressBar.appendChild(progressLine);
+            progressWrapper.appendChild(pagination);
+            wrapper.parentNode.insertBefore(arrowPrev,wrapper);
+            wrapper.parentNode.insertBefore(arrowNext,wrapper);
+        
+            slides = slider.querySelectorAll('.rlc-slide');
+            const pLength = slides.length;
+            pagination.innerHTML = pagination.innerHTML+'<div class="rlc-page"><span class="rlc-counter">'+(index+1)+'</span></div><div class="rlc-page"><span class="rlc-total">'+pLength+'</span></div>';
+            const pcounter = pagination.querySelector('.rlc-counter');
+
+            function setDuration(slide) {
+                var x = slide.dataset.duration;
+                if (x == undefined || x == '') {
+                    var d = duration/1000;
+                } else {
+                    var d = x;
+                }
+                return d;
+            } 
+
+            slides[0].classList.add('rlc-active');
+            slider.classList.add('rlc-init');
+
+            if (slider.dataset.autoplay === 'true') {
+                autoplay = true;
+                pauseButton = document.createElement('button');
+                pauseButton.setAttribute("class", "rlc-looppause");
+                pauseButton.setAttribute("rlc-looppause", "play/pause button");
+                progressBar.parentNode.insertBefore(pauseButton,progressBar);
+                dur = parseInt(setDuration(slides[0])); 
+                prog.fromTo(progressLine, dur, {width: '0%',ease:Linear.easeNone},{width: '100%',ease:Linear.easeNone},0);
+                startAutoPlay();
+            } else {
+                progressBar.style.display = 'none';
+                slider.classList.add('rlc-no-autoplay');
+            }
+
+            if (slider.classList.contains('rlc-hero')) {
+                ScrollTrigger.create({
+                    trigger: slider,
+                    start: () => "top bottom",
+                    end: () => "bottom bottom",
+                    scrub: true,
+                    onEnter: function() {
+                        progressWrapper.classList.add("rlc-fixed");
+                    },
+                    onLeave: function() {
+                        progressWrapper.classList.remove("rlc-fixed");
+                    },
+                    onEnterBack: function() {
+                        progressWrapper.classList.add("rlc-fixed");
+                    },
+                    onLeaveBack: function() {
+                        progressWrapper.classList.remove("rlc-fixed");
+                    }
+                });
+            }
+
+            function startAutoPlay(){
+                
+                if (autoplay && !paused) {        
+                    if (slides[activeIdx].dataset.duration == undefined || slides[activeIdx].dataset.duration == '') {
+                        var timeout = duration;
+                    } else {
+                        var timeout = slides[activeIdx].dataset.duration*1000;
+                    }
+                    clearInterval(countSeconds);
+                    slider.classList.add('rlc-autoplay');
+                    slider.classList.remove('user_paused');
+
+                    countSeconds = setInterval(function(){
+                        if (seconds >= timeout/1000) {
+                            seconds = 1;
+                            var ni = activeIdx+1;
+                            if (ni == slides.length) {
+                                ni = 0;
+                            }
+                            sDir = 'left';
+                            updateActive();
+                            nextTL.play();
+                            clearInterval(countSeconds);
+                            return;
+                        } else {
+                            seconds++;
+                        }
+                    },1000);
+                } 
+            }
+
+            function stopAutoPlay(){
+                clearInterval(countSeconds);
+                slider.classList.add('user_paused');
+                slides[activeIdx].dispatchEvent(LEAVE_VIEWPORT);
+            }
+
+            gsap.to(slider,{scrollTrigger: {
+                trigger: slider.closest('.rlc-block'),
+                start: () => "center top",
+                onEnter: function(){
+                    if (autoplay) {
+                        interacted = true;
+                        clearInterval(countSeconds);
+                        if (!paused) {
+                            prog.restart();
+                            prog.pause();
+                        }
+                    }
+                    if (!paused) {
+                        slides.forEach(function ($element, index) {
+                            $element.dispatchEvent(LEAVE_VIEWPORT);
+                        });
+                    }
+                },
+                onEnterBack: function(){
+                    if (autoplay) {
+                        interacted = false;
+                        startAutoPlay();
+                        if (!paused) {
+                            prog.play();
+                        }
+                    }
+                    if (!paused) {
+                        nextSlide.dispatchEvent(ENTER_VIEWPORT);
+                    }
+                }
+            }});
+
+            function moveNext(target){
+                var tl = new TimelineLite({paused: true, onComplete: resetSlidesComplete, onReverseComplete: resetSlidesReverse});
+                var nextcopy = nextSlide.querySelector('.rlc-copygroup');
+                var prevcopy = prevSlide.querySelector('.rlc-copygroup');
+
+                if (isDesktop.matches) {
+                    var slideToLeft = '40em',
+                        copyToLeft = '6em',
+                        slideDur = 0.7
+                    ;
+                } else {
+                    var slideToLeft = '17.578em',
+                        copyToLeft = '6em',
+                        slideDur = 0.7
+                    ;
+                }
+                if (sDir == 'left') {
+                    tl.fromTo(nextSlide,slideDur, {x: slideToLeft, opacity: 0},{x: 0, opacity: 1},0);
+                    tl.from(nextcopy, slideDur, {marginLeft: copyToLeft},0);
+                    tl.to(prevcopy, 0.25, {opacity: 0},0);
+                } else {
+                    copyToLeft = '-'+copyToLeft;
+                    tl.fromTo(nextSlide,slideDur, {x: '-'+slideToLeft, opacity: 0},{x: 0, opacity: 1},0);
+                    tl.from(nextcopy, slideDur, {marginLeft: copyToLeft},0);
+                    tl.to(prevcopy, 0.25, {opacity: 0},0);
+                }
+                return tl;
+            } 
+
+            function drawProgress() {
+                prog.restart();
+                prog.duration(parseInt(setDuration(nextSlide)));
+                prog.play();
+            }
+
+            function resetSlidesComplete() {
+                pcounter.innerHTML = (activeIdx+1);
+                clearInterval(countSeconds);
+                seconds = 1;
+                startAutoPlay();
+                interacted = false;
+                
+                if (!paused) {
+                    if (sCancel) {
+                        prog.play();
+                        sCancel = false;
+                    } else {
+                        drawProgress();
+                    }
+                    slides[activeIdx].dispatchEvent(ENTER_VIEWPORT);
+                } else {
+                    prog.restart();
+                    prog.pause();
+                }
+                slides.forEach(function ($element, index) {
+                    var copy = $element.querySelector('.rlc-copygroup');
+                    copy.style.margin = 'auto';
+                    copy.style.opacity = 1;
+                });
+            }
+
+            function resetSlidesReverse() {
+                pcounter.innerHTML = (activeIdx+1);
+                clearInterval(countSeconds);
+                startAutoPlay();
+                interacted = false;
+                if (sCancel && sDir == 'left') {
+                    activeIdx = prevIdx;
+                    resetSlidesComplete();
+                }
+                if (sCancel && sDir == 'right') {
+                    activeIdx = prevIdx;
+                    prevIdx = activeIdx - 1;
+                    if (prevIdx < 0) {
+                        prevIdx = slides.length-1;
+                    }
+                    resetSlidesComplete();
+                }
+            }
+
+            function updateActive(skip){
+                var skip = skip;
+                seconds = 1;
+                slider.classList.add('rlc-'+sDir);
+                slides.forEach(function ($element, index) {
+                    $element.classList.remove('rlc-prev');
+                    $element.style.left = 'auto';
+                    $element.style.right = 'auto';
+                    $element.style.opacity = 1;
+                    $element.querySelector('.rlc-copygroup').style.opacity = 1;
+                });
+                prevIdx = activeIdx;
+                prevSlide = slides[activeIdx];
+                prevSlide.classList.add('rlc-prev');
+                if (skip != undefined) {
+                    activeIdx = skip;
+                } else {
+                    if (sDir == 'left') {
+                        activeIdx = activeIdx+1;
+                        if (activeIdx == slides.length) {
+                            activeIdx = 0;
+                        }
+                    } else {
+                        activeIdx = activeIdx-1;
+                        if (activeIdx < 0) {
+                            activeIdx = slides.length-1;
+                        }
+                    }
+                }
+                nextSlide = slides[activeIdx];
+                let nextNextSlide = null;
+                if (activeIdx+1 != slides.length-1) {
+                    nextNextSlide = slides[activeIdx+1];
+                }
+                slides.forEach(function ($element, index) {
+                    $element.classList.remove('rlc-active');
+                });
+                nextSlide.classList.add('rlc-active');
+                if (!paused) {
+                    slides.forEach(function ($element, index) {
+                        $element.dispatchEvent(LEAVE_VIEWPORT);
+                    });
+                    nextSlide.dispatchEvent(ENTER_VIEWPORT);
+                }
+                if (nextSlide.classList.contains('rlc-ll_manual') &! nextSlide.classList.contains('rlc-imgLoaded')) {
+                    nextSlide.dispatchEvent(LOAD_IMAGE);
+                }
+                if (nextNextSlide != null) {
+                    if (nextNextSlide.classList.contains('rlc-ll_manual') &! nextNextSlide.classList.contains('rlc-imgLoaded')) {
+                        nextNextSlide.dispatchEvent(LOAD_IMAGE);
+                    }
+                }
+                nextTL = moveNext(nextSlide);
+            }
+
+
+            function updateProgress() {
+                var p = Math.abs(startProg - this.x);
+
+                // can't drag past width of slider:
+                if (p >= sliderWidth) { p = sliderWidth; }
+                if (p <= 0) { p = 0; }
+
+                // distance value between 0 and 1:
+                var z = p/sliderWidth;
+
+                // heading in one direction:
+                if (z >= sMax) {
+                    sMax = z;
+                    sCancel = false;
+                } 
+
+                // direction has switched:
+                if (z <= sMax-0.05) {
+                    sCancel = true;
+                }
+                    
+                // user has not dragged far enough, so cancel
+                if (z <= 0.05) {
+                    sCancel = true;
+                }
+                nextTL.progress(z);
+            }
+
+            var draggable = new Draggable(proxy, {
+                trigger: slider,
+                type: "x",
+                lockAxis: true,
+                onDrag: updateProgress,
+                onDragStart: function(){
+                    interacted = true;
+                    clearInterval(countSeconds);
+                    sCancel = false;
+                    sDir = this.getDirection('start');
+                    updateActive();
+                    prog.restart();
+                    prog.pause();
+                },
+                onDragEnd: function(){
+                    startProg = this.endX; 
+                    sMax = 0;
+                    if (sCancel) {
+                        nextTL.reverse();
+                    } else {
+                        nextTL.play();
+                    }
+                },
+                allowEventDefault: false
+            });
+
+            arrowNext.addEventListener('click', function (event) {
+                sDir = 'left';
+                if (interacted) {
+                    return;
+                }
+                interacted = true;
+                clearInterval(countSeconds);
+                updateActive();
+                prog.restart();
+                prog.pause();
+                nextTL.play();
+            });
+
+            arrowPrev.addEventListener('click', function (event) {
+                sDir = 'right';
+                if (interacted) {
+                    return;
+                }
+                interacted = true;
+                clearInterval(countSeconds);
+                updateActive();
+                prog.restart();
+                prog.pause();
+                nextTL.play();
+            });
+
+            copyGroups.forEach(function ($element, index) {
+                if (autoplay) {
+                    $element.addEventListener('mouseover', function (event) {
+                        if (paused) {
+                            return;
+                        }
+                        paused = false;
+                        interacted = true;
+                        prog.pause();
+                        clearInterval(countSeconds);
+                    });
+                    $element.addEventListener('mouseleave', function (event) {
+                        if (paused) {
+                            return;
+                        }
+                        prog.play();
+                        paused = false;
+                        interacted = false;
+                        startAutoPlay();
+                    });
+                }
+            });
+
+            pauseButton.addEventListener('click', function (event) {
+                if (!paused) {
+                    if (autoplay) {
+                        stopAutoPlay();
+                        clearInterval(countSeconds);
+                        seconds = 1;
+                        prog.restart();
+                        prog.pause();
+                    }
+                    slides.forEach(function ($element, index) {
+                        $element.dispatchEvent(LEAVE_VIEWPORT);
+                    });
+                    paused = true;
+                } else {
+                    paused = false;
+                    slides[activeIdx].dispatchEvent(ENTER_VIEWPORT);
+                    if (autoplay) {
+                        startAutoPlay();
+                        drawProgress();
+                    }
+                }
+                //console.log('paused = '+paused);
+                return false;
+            });
+
+            window.addEventListener('resize', function(){
+                sliderWidth = slider.offsetWidth;
+            });
+
+        });
+
+
+        return;
+
+    }
+
+});

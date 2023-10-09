@@ -1,0 +1,16 @@
+@media screen and (max-width: 956px) {
+  .alert-locators {
+    display: none;
+  }
+  .alert-locators {
+    border: red solid 3px;
+    display: none;
+  }
+  .header-links {
+    display: none;
+  }
+  .footer-con {
+    display: block;
+    background-color: red;
+  }
+}/*# sourceMappingURL=responsiveness.css.map */

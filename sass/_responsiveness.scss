@@ -1,0 +1,467 @@
+// IMPORT ALL PAGES DEFAULT STYLES
+@import 'variables.scss';
+// @import 'global.scss';
+
+
+
+
+// ===================
+// MOBILE: => max-width: 760PX
+// ===================
+
+
+
+@media screen and (max-width: 760px) {
+    // HEADER
+    // END OF HEADER
+
+
+    // HERO
+    // END OF HERO
+
+    // POLO BEAR
+    .polo-bear{
+        background-image: url(/ASSETS/IMAGES/general/0209_country_selector_bg.jpg);
+        background: $white !important;
+        
+        // polo bear container
+        .polo-bear-con{
+            display: block !important;
+
+            .p-bear-left, .polo-bear-right{
+                gap: 0;
+                width: 100% !important;
+
+            }
+
+            .p-bear-left{
+                margin-bottom: 8rem;
+                
+
+                section{
+                    text-align: center;
+                    color: $primary-blue;
+
+                    
+                }
+
+                a{
+                    color: $primary-blue !important;
+                }
+
+                h2{
+                    font-size: $xlg-text;
+                    
+                }
+            }
+        }
+        // end of polo bear container
+    }
+    // END OF POLO BEAR
+
+
+
+    .bear-shop{
+
+        .b-shop-title{
+            font-size: 6rem !important;
+        }
+    }
+
+
+
+
+
+    // SHOP BY CATEGORY
+    .shop-by-cat{
+
+        // shop by category container
+        .s-by-cat-con{
+            width: 90vw !important;
+
+            .s-by-cat-title{
+                font-size: $lg-text !important;
+            }
+            
+        }
+
+        // single category
+        .single-category{
+            min-width: 70vw !important;
+            margin: 1.5rem !important;
+
+            p{
+                font-size: 1.5rem !important;
+            }
+
+            a{
+                
+                text-decoration: none !important;
+            }
+        }
+    }
+    // END OF SHOP BY CATEGORY
+
+
+    // LIVING
+    .living{
+        background-image: url(/ASSETS/IMAGES/general/0209_country_selector_bg.jpg);
+
+        .living-con{
+
+
+            .living-items{
+                width: 90% !important;
+                
+
+                .living-text{
+
+                    h2{
+                        font-size: $xlg-text;
+                    }
+                    
+                    p{
+                        font-size: $medium-text;
+                    }
+
+
+                }
+            }
+        }
+    }
+    // END OF LIVING
+
+    
+
+
+    // RLC
+    .double-rl{
+        background: none !important;
+       
+
+        .rcl-mobile-img{
+            display: block !important;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+        }
+
+        .double-rl-con{
+            
+            left: 5%;
+            height: fit-content;
+            margin: auto;
+            bottom: 0;
+            // margin-top: 100%;
+            width: 90% !important;
+
+            img{
+                width: 100%;
+            }
+            
+        }
+    }
+    // END OF RLC
+
+
+    // HOMEPAGE EXPLORE
+    .homepage-explore{
+
+        .home-explore-con{
+
+            display: block !important;
+            
+            // overflow-x: auto;
+
+            .single-explore{
+                width: 100% !important;
+
+                p{
+                    font-size: calc($medium-text + 1rem) !important;
+                }
+
+                a{
+                    font-size: $medium-text;
+                }
+            }
+        }
+    }
+    // END OF HOMEPAGE EXPLORE
+
+
+
+    // MEN EXLORE
+    .men-explore{
+
+        
+
+        .single-explore{
+            // border: red solid 2px;
+            min-width: 70% !important;
+        }
+
+    }
+    // END OF MEN EXPLORE
+
+
+    // PURPLE LABEL
+    .purple-label{
+        padding: 1rem 2rem 0 !important;
+
+
+        .purple-label-con{
+            flex-direction: column;
+
+            // .purple-label lfet
+
+
+            // purplelabel right
+            .purple-label-left{
+                order: 1 !important;
+                padding: 3rem 0 !important;
+            }
+
+
+            .purple-label-left, .purple-label-right{
+                width: 100% !important;
+            }
+        }
+    }
+    // END OF PURPLE LABEL
+
+    
+
+
+
+}
+
+
+// ===================
+// END OF MOBILE: => 760PX
+// ===================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ===================
+// TABLET: => 956PX
+// ===================
+
+
+@media screen and (max-width: 956px) {
+
+
+    .alert-con{
+        justify-content: center !important;
+    }
+    .alert-locators{
+        
+        display: none;
+    }
+
+    
+    
+    .alert-locators{
+        border: red solid 3px;
+        display: none !important;
+    }
+
+
+    // HEADER TABLET
+    .header-links{
+        display: none !important;
+    }
+
+    .header-icons{
+        gap: 0;
+    }
+
+    .unshow-icon{
+        display: none ;
+
+    }
+
+    .menu-icon{
+        display: inline !important;
+    }
+
+
+    // END OF HEADER TABLET
+
+    
+    // PINK PONY
+    .pink-pony{
+        
+        .p-pony-title{
+            
+            .p-heading{
+                font-size: calc(100% * 3);
+            }
+        }
+
+        .p-slider-title, .p-slider-description{
+            font-size: calc(100% * 4);
+        }
+    }
+    // END OF PINK PONY
+
+
+
+
+
+
+    // polo bear
+    .bear-shop{
+
+        div{
+            text-align: center;
+        }
+
+        .b-shop-title{
+            font-size: 7em !important;
+        }
+
+        .b-shop-description{
+            font-size: $medium-text !important;
+            width: 70%;
+            margin: auto !important;
+        }
+
+        .box-logo{
+            display: none;
+        }
+
+
+    }
+
+
+    // SKATING
+    .skating{
+        justify-content: center !important;
+
+        .skating-con{
+            width: 80vw !important;
+        }
+    }
+    // END OF SKATING
+
+
+
+    // DISCOVER TABLET
+    .discover-section{
+        width: 100vw;
+        border: 2px solid;
+
+        // discover left
+        .discover-left{
+            display: none;
+        }
+        // end of discover left
+
+        // discover right
+        .discover-right{
+            padding: 0;
+
+            width: 100%;
+            height: 100%;
+            display: block;
+            border: solid 2px;
+
+        }
+        // end of discover right
+    }
+    // END OF DISCOVER TABLET
+
+
+    
+
+
+    // MEN EXPLORE
+    .men-explore{
+        background: red ;
+
+        .explore-left{
+            display: none;
+        }
+
+    }
+    // END OF MEN EXPLORE
+
+
+
+    // FOOTER TABLET
+
+    // footer container
+    .footer-con{
+        display: block !important;
+
+        // footer newsleter
+        .footer-newsletter{
+            h4{
+                font-size: $small-text;
+            }
+
+            p{
+                font-size: $xsmall-text;
+            }
+
+            
+
+            
+        }
+        // end of footer news letter
+
+        // FOOTER SECTIONS
+        
+            section{
+                display: flex;
+                justify-content: space-between;
+                border: none;
+                border-top: 1px #999 solid;
+                border-right: none !important;
+                padding-top: 2rem;
+                margin-top: 2rem;
+
+                .plus{
+                    display: block !important;
+                }
+
+                li{
+                    line-height: 2.5;
+
+                    a{
+                        color: black;
+                    }
+                }
+            }
+        
+        
+    }
+    // end of footer container
+
+
+
+    // 1200PX RESPONSIVE
+
+    @media (max-width: 1200px) {
+        
+    }
+
+
+    // END OF FOOTER BOTTOM
+    // END OF FOOTER TABLET
+}

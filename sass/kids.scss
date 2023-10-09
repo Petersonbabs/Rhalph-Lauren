@@ -1,0 +1,123 @@
+// import variables
+@import 'variables.scss';
+
+// import responsiveness
+@import 'responsiveness';
+
+
+
+
+
+// ==========================
+// KIDS TAB
+// =========================
+
+
+.kids-tab{
+    margin: 3rem 0;
+
+    // tab header
+    .tab-header{
+        padding: 2rem 0;
+        background: $primary-blue;
+        @include flex-center-center;
+        gap: 2rem;
+        // position: relative;
+
+        // tab title
+
+
+        #shop-kids, #shop-baby{
+            display: none;
+        }
+
+        label{
+            color: white;
+            border-bottom: 3px solid #fff;
+            padding-bottom: 1.9rem;
+        }
+
+
+            #shop-kids:checked ~ .tab-sample1 
+                #shop-baby:checked ~ .tab-sample2 {
+                display: block;
+
+            }
+
+                .tab-sample1, .tab-sample2{
+                    display: none;
+                    position: absolute;
+                    background: green;
+                    width: 100vw;
+                    margin-top: 2rem;
+                    left: 0;
+                
+            }
+
+            .tab-title:focus{
+                color: red;
+                text-decoration: underline;
+                padding: 2rem;
+
+                .tab-sample1{
+                    display: block;
+                }
+            }
+        
+
+        
+        // end of tab title
+
+
+
+        // tab shop
+        .tab-shop{
+            // position: absolute;
+            margin-top: 2rem;
+            left: 0;
+            width: 100vw;
+            background: blue;
+            display: none;
+
+            // tab shop container
+            .tab-shop-con{
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 1rem;
+                width: 100%;
+                
+
+
+                // single shop item
+                .single-shop-item{
+                    border: red solid 2px;
+                    width: 20%;
+                    position: relative;
+                    height: 300px;
+
+                    // shop item title
+                    .shop-item-title{
+                        border: solid 2px;
+                        padding: 1rem;
+                        position: absolute;
+                        bottom: 0;
+                        text-align: center;
+                    }
+                    // end of shop item title
+                }
+                // end of single shop item
+            }
+            // end of tab shop container
+
+        }
+        // end of tab shop
+    }
+    // end of tab header
+
+
+}
+
+
+// ==========================
+// END OF KIDS TAB
+// =========================

@@ -1,0 +1,125 @@
+
+
+
+// ===================
+// ===================
+// VARIABLES
+// ===================
+// ===================
+
+
+// fonts
+$monospace: monospace;
+$helvetica: Helvetica, sans-serif;
+$times: times;
+
+$xsmall-text: 10px;
+$small-text: 12px;
+$regular-text: 15px;
+$medium-text: 27px;
+$lg-text: 35px;
+$xlg-text: 45px;
+
+// colors
+$light-blue: #153456;
+$pink: #DC8B9A;
+$primary-blue: #041E3A;
+$white: #fff;
+$gold: #BAAD72;
+
+
+// ===================
+// ===================
+// VARIABLES
+// ===================
+// ===================
+
+
+
+
+
+
+
+// ===================
+// ===================
+// VISIBILITIES
+// ===================
+// ===================
+$vis-blue: solid 1px $primary-blue;
+
+
+// ===================
+// ===================
+// END OF VISIBILITIES
+// ===================
+// ===================
+
+
+
+
+
+
+
+// ===================
+// ===================
+//  MIXINS
+// ===================
+// ===================
+
+@mixin flex-align-center{
+    display: flex;
+    align-items: center;
+}
+
+
+
+@mixin flex-end-center{
+    display: flex;
+    align-items: center;
+    justify-content: end ;
+}
+
+@mixin flex-center-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-space-center {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin background-norepeat-cover-center{
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@mixin background-norepeat-contain-center{
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+@mixin link-animate{
+    border-bottom: 1px solid $white;
+    padding-bottom: 5px;
+    text-decoration: none;
+    color: $white;
+    // transition: all 0.5s ease;
+}
+
+@mixin link-animated{
+    padding-bottom: 0;
+}
+
+@mixin grid-repeat-2fr{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+// ===================
+// ===================
+// END OF MIXINS
+// ===================
+// ===================

@@ -1,0 +1,206 @@
+// importing variables
+
+@import 'variables.scss';
+
+// 
+
+.d-body-wrapper{
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    // position: relative;
+
+    // backgrounds
+    .whats-new{
+        background: url(/ASSETS/IMAGES/Discover_files/what-new-bg.jpg);
+    }
+
+    .men-brands{
+        background: url(/ASSETS/IMAGES//Discover_files/men-brand-bg.jpg);
+    }
+
+    .women-brands{
+        background-image: url(/ASSETS/IMAGES/Discover_files/women-brands-bg1.jpg);
+    }
+
+    .home-brands{
+        background: url(/ASSETS/IMAGES/Discover_files/home-brands.jpg);
+    }
+
+    .our-story{
+        background: url(/ASSETS/IMAGES/Discover_files/our-story-bg.jpg);
+    }
+
+    .restaurants{
+        background: url(/ASSETS/IMAGES/Discover_files/restaurants-bg.jpg);
+        margin-bottom: 3rem;
+    }
+    // end of backgrounds
+
+    .discover-section{
+        height: 100vh;
+        scroll-snap-align: start;
+        @include flex-align-center;
+    }
+
+    // discover navigation
+    .discover-nav{
+        background: gray;
+        position: sticky;
+        // width: 100%;
+        // bottom: 0;
+
+        .d-nav-con{
+            border: solid 2px;
+            width: 90%;
+            display: none;
+            margin: 0 auto;
+
+            ul{
+
+                @include flex-align-center;
+                
+                li{
+                    padding: 2rem;
+
+                    a{
+                        color: #fff;
+                        font-size: 1.2rem;
+                    }
+                }
+
+                li:hover{
+                    border-top: 3px $white solid;
+                }
+            }
+        }
+    }
+    // end of discover navigation
+
+
+    
+
+
+
+    // container
+    .section-one-con{
+        @include flex-space-center;
+        gap: 8rem;
+        width: 90vw;
+        margin: 0 auto;
+
+        // discover left
+        .discover-left{
+            color: $white;
+            width: 30%;
+            font-family: times;
+
+            h4{
+                font-size: $regular-text;
+                font-weight: 500;
+
+            }
+
+            h2{
+                font-size: calc($medium-text + 0.5rem);
+                font-weight: 500;
+            }
+
+            p{
+                font-size: $small-text;
+            }
+
+            a{
+                text-decoration: none;
+                transition: all 0.8s ease;
+                @include link-animate;
+                color: #fff;
+                font-size: $small-text;
+            }
+
+            a:hover{
+                @include link-animated;
+            }
+
+        }
+        // end of discover left
+
+        .discover-right::-webkit-scrollbar{
+            visibility: hidden;
+        }
+
+        // discover right
+        .discover-right{
+            overflow-x: scroll;
+            height: 100%;
+
+
+            .d-carousel{
+                width: 100vw;
+                height: 100%;
+                padding: 1rem;
+                display: flex;
+                align-items: center;
+
+
+                .d-carousel-item{
+                    margin: 0.5rem;
+                    position: relative;
+                    height: 100%;
+                    width: calc(100% / 3);
+                    cursor: pointer;
+                    overflow: hidden;
+
+                    img{
+                        Max-width: 100%;
+                        max-height: 100%;
+                        position: relative;
+                        object-fit: cover;
+                    }
+
+                    .d-carousel-text{
+                        position: absolute;
+                        bottom: -30%;
+                        text-align: center;
+                        color: #fff;
+                        padding: 1.5rem;
+                        background-image: linear-gradient(rgba(0, 0, 0, 0.048), rgba(0, 0, 0, 0.582), rgba(0, 0, 0, 0.952));
+                        transition: all 0.8s ease;
+                        
+                        h2, img{
+                            margin-bottom: 3rem;
+                        }
+
+                        h2, p{
+                            font-family: times;
+                        }
+                    
+                    }
+
+                    
+                }
+
+                .d-carousel-item:hover .d-carousel-text{
+                    bottom: 0;
+                }
+            }
+        }
+        // end of discover right
+    }
+    // end of container
+
+
+
+
+
+
+}
+// END OF DISCOVER BODY WRAPPER
+
+.discover-section{
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    // width: 100vw;
+    scroll-snap-align: start;
+    @include flex-align-center;
+}

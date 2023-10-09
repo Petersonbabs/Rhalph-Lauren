@@ -1,0 +1,18 @@
+#rlc-sticky-sub-nav { position: sticky; position: -webkit-sticky; z-index: 10; width: 100%; background-color: #111a1f; color: #ffffff; padding: 1.875em 0 2em 0;
+}
+#rlc-sticky-sub-nav .rlc-dropdown-content { display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: center; align-items: center;
+}
+#rlc-sticky-sub-nav .rlc-linecta { font-family: "LeJeuneDeck-Regular", Times, serif; font-weight: 100; font-size: 1.125em; line-height: 1.222em; letter-spacing: 0; text-transform: none; margin: 0 2em; padding-bottom: 0.111em; color: #8f8f8f;
+}
+#rlc-sticky-sub-nav .rlc-linecta.rlc-nav_cta-active { color: #ffffff;
+}
+#rlc-sticky-sub-nav .rlc-linecta:hover::after { bottom: 0em;
+}
+#rlc-sticky-sub-nav .rlc-linecta::after { background: transparent !important;
+}
+#rlc-sticky-sub-nav .rlc-linecta.rlc-nav_cta-active::after { background: #ffffff !important;
+}
+#rlc-sticky-sub-nav .rlc-dropbtn { display: none;
+}
+@media screen and (max-width: 767px) { #rlc-sticky-sub-nav { position: fixed; z-index: 15; width: 100%; background-color: #111a1f; color: #ffffff; padding: 0; height: 3.5em; display: flex; justify-content: center; align-items: center; overflow: visible; } #rlc-sticky-sub-nav .rlc-linecta { font-family: "LeJeuneDeck-Regular", Times, serif; font-weight: 100; font-size: 1.125em; line-height: 1.556em; letter-spacing: 0; text-transform: none; margin: 1em 0; padding-bottom: 0.111em; color: #8f8f8f; } #rlc-sticky-sub-nav .rlc-linecta.rlc-nav_cta-active { color: #ffffff; } #rlc-sticky-sub-nav .rlc-linecta:hover::after { bottom: 0em; } #rlc-sticky-sub-nav .rlc-sub { font-family: "LeJeuneDeck-Regular", Times, serif; font-weight: 100; font-size: 1.125em; line-height: 1.556em; letter-spacing: 0; text-transform: none; margin: 0 auto; color: transparent; display: none; } #rlc-sticky-sub-nav .rlc-sub.rlc-active-dd { font-family: "LeJeuneDeck-Regular", Times, serif; font-weight: 100; font-size: 1.125em; line-height: 1.556em; letter-spacing: 0; text-transform: none; margin: 0 auto; color: #ffffff; display: inline-block; } #rlc-sticky-sub-nav .rlc-dropbtn { display: block; } #rlc-sticky-sub-nav .rlc-dropdown { display: flex; justify-content: center; align-items: center; } #rlc-sticky-sub-nav .rlc-dropdown-content { display: none; position: absolute; top: 3.5em; border-top: 2px solid rgba(255, 255, 255, 0.5); z-index: 1; background-color: #111a1f; width: 100%; } #rlc-sticky-sub-nav .rlc-dropdown-content { display: none; position: absolute; top: 3.5em; border-top: 2px solid rgba(255, 255, 255, 0.5); z-index: 1; background-color: #111a1f; width: 100%; } #rlc-sticky-sub-nav .rlc-dropdown.rlc-dd-active .rlc-dropdown-content { display: flex; flex-direction: column; flex-wrap: nowrap; justify-content: center; align-items: center; padding: 0.5em 0; } #rlc-sticky-sub-nav .rlc-dropdown.rlc-dd-active .fa-caret-down:before { content: "\f0d8"; } .fa { color: #ffffff; }
+}

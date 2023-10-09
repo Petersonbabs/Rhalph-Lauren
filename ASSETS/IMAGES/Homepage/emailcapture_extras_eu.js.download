@@ -1,0 +1,39 @@
+window._rlc.rlCustomJS(function() {
+	// ---- DOM references ----
+	const emailSignup = document.getElementById("rlc-email-signup");
+	const inputTF = emailSignup.getElementsByClassName("input-text")[0];
+	const emailSuccess = emailSignup.getElementsByClassName("email-success-show")[0];
+	const thankMsg = emailSignup.getElementsByClassName("thank-msg")[0];
+
+	// ---- reset email form ----
+	function resetForm() {
+		console.log("resetForm()");
+		emailSuccess.classList.add("hide");
+		inputTF.value = "";
+		thankMsg.innerHTML = "";
+	}
+
+	// ---- Init function ----
+	function initForm() {
+		console.log("initForm()");
+		// -- When input field is in focus after a "Thank You" message, reset form --
+		inputTF.addEventListener("focus", function() {
+			if (emailSuccess.classList.contains("hide") == false) {
+				resetForm();
+			}
+		});
+
+		// -- Sets node insertion event listener on thankMsg to listen for a non-empty reply --
+		thankMsg.addEventListener("DOMNodeInserted", function(e) {
+			if (e.target.data != "") {
+				console.log("thankMsg DOMNodeInserted - submit success!");
+				inputTF.blur();
+				inputTF.value = "";
+			} else {
+				console.log("thankMsg DOMNodeInserted - didn't receive proper response");
+			}
+		});
+	}
+
+	initForm();
+});

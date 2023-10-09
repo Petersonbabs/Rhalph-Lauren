@@ -1,0 +1,30 @@
+.is-ie .rlc-stickyswipernav { display: none;
+}
+.rlc-stickyswipernav { position: fixed; z-index: 5; height: 5.125em;
+}
+.rlc-stickyswipernav .rlc-stickyswiper { position: relative;
+}
+.rlc-stickyswipernav .rlc-stickyswiper .rlc-track { height: 100%; white-space: nowrap; position: relative; -ms-overflow-style: none; scrollbar-width: none; overflow-x: auto; overflow-y: hidden;
+}
+.rlc-stickyswipernav .rlc-stickyswiper .rlc-track::-webkit-scrollbar { display: none;
+}
+.rlc-stickyswipernav .rlc-slide { padding: 0; color: #fff; cursor: pointer; position: relative; display: inline-block;
+}
+.rlc-creative_v3 .rlc-stickyswipernav .rlc-slide .rlc-copygroup { height: 100%; text-align: center; opacity: 0.6; white-space: normal; display: flex; align-items: center; overflow: hidden; justify-content: center;
+}
+.rlc-creative_v3 .rlc-stickyswipernav .rlc-slide.rlc-active .rlc-copygroup { opacity: 1;
+}
+.rlc-creative_v3 .rlc-stickyswipernav .rlc-slide .rlc-copygroup .rlc-dek { margin: 0 auto;
+}
+.rlc-stickyswipernav .rlc-indicatorbar { position: absolute; left: 0; width: 100%; height: 2px; background: #fff; z-index: 2;
+}
+.rlc-stickyswipernav .rlc-indicator { position: absolute; top: auto; bottom: 0; left: 0; height: 3px; background: #fff; z-index: 2; transition: left 0.5s;
+}
+@media (hover: hover) { .rlc-creative_v3 .rlc-stickyswipernav .rlc-slide:hover .rlc-copygroup { opacity: 1; }
+}
+.rlc-creative_v3 .rlc-stickyswipernav .rlc-copygroup .rlc-name span { white-space: nowrap;
+}
+@media screen and (min-width: 768px) { .rlc-stickyswipernav { top: auto; bottom: 0 !important; left: 0; right: 0; border-top: 1px solid #fff; } .rlc-stickyswipernav .rlc-stickyswiper { width: 88em; height: 5.125em; margin-left: 2.125em; } .rlc-stickyswipernav .rlc-stickyswiper .rlc-track { display: flex; } .rlc-stickyswipernav .rlc-indicatorbar { top: 6.875em; } .rlc-stickyswipernav .rlc-indicator { top: 0; width: auto; } .rlc-stickyswipernav .rlc-slide { width: auto; height: 5.125em; margin: 0 1.25em; } .fr.rlc-creative_v3 .rlc-stickyswipernav .rlc-slide .rlc-copygroup .rlc-dek, .it.rlc-creative_v3 .rlc-stickyswipernav .rlc-slide .rlc-copygroup .rlc-dek, .de.rlc-creative_v3 .rlc-stickyswipernav .rlc-slide .rlc-copygroup .rlc-dek, .es.rlc-creative_v3 .rlc-stickyswipernav .rlc-slide .rlc-copygroup .rlc-dek, .nl.rlc-creative_v3 .rlc-stickyswipernav .rlc-slide .rlc-copygroup .rlc-dek, .pt.rlc-creative_v3 .rlc-stickyswipernav .rlc-slide .rlc-copygroup .rlc-dek, .ar.rlc-creative_v3 .rlc-stickyswipernav .rlc-slide .rlc-copygroup .rlc-dek { font-size: 1em; }
+}
+@media screen and (max-width: 767px) { .rlc-stickyswipernav { height: 3.125em; left: 0; transform: none; top: calc(var(--sNav-RLNavHeight)); bottom: auto !important; } .rlc-stickyswipernav .rlc-stickyswiper { width: 23.5em; height: 3.125em; } .rlc-stickyswipernav .rlc-intro { display: none; } .rlc-stickyswipernav .rlc-indicator { top: calc(3.1em - 2px); width: 5em; } .rlc-stickyswipernav .rlc-slide { width: auto; height: 3.125em; margin: 0 0 0 1.6em; } .rlc-stickyswiper .rlc-slide:last-child { margin-right: 1.5em; } .rlc-creative_v3 .rlc-stickyswipernav .rlc-slide .rlc-copygroup { top: auto; height: calc(3.125em - 2px); width: 100%; justify-content: center; position: relative; } .rlc-creative_v3 .rlc-stickyswipernav .rlc-copygroup .rlc-name { font-size: 0.688em; line-height: 1.182em; }
+}
